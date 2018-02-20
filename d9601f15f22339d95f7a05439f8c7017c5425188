@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "336c933e_b3075902",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-20T23:33:07Z",
+      "side": 1,
+      "message": "This should say \"response\" instead of \"message\".  It is the HTTP status code that is important here, not the response body content (which I plan to make customisable later anyway).",
+      "parentUuid": "6bcc6ed3_078004f1",
+      "range": {
+        "startLine": 10,
+        "startChar": 24,
+        "endLine": 10,
+        "endChar": 47
+      },
+      "revId": "d9601f15f22339d95f7a05439f8c7017c5425188",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "03bcaf0e_5f75cd98",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/ReadOnly.java",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2018-02-20T15:39:22Z",
       "side": 1,
       "message": "Are we sure that we want to block *ALL* traffic? What about the login requests? They should be POST but we don\u0027t want to block them.",
+      "range": {
+        "startLine": 49,
+        "startChar": 10,
+        "endLine": 49,
+        "endChar": 67
+      },
+      "revId": "d9601f15f22339d95f7a05439f8c7017c5425188",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7bbbaff_fe2d4f01",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/ReadOnly.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-20T23:33:07Z",
+      "side": 1,
+      "message": "I hadn\u0027t considered that. However a login is creating a session and possibly invalidating caches, so from that point of view allowing it would mean the server is not read only.\n\nI would like to defer improvement of this to a follow-up change. I\u0027ll mention the limitation in the commit message.",
+      "parentUuid": "03bcaf0e_5f75cd98",
       "range": {
         "startLine": 49,
         "startChar": 10,
