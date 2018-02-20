@@ -14,20 +14,43 @@
 
 package com.googlesource.gerrit.plugins.readonly;
 
+import static javax.servlet.http.HttpServletResponse.SC_SERVICE_UNAVAILABLE;
+
+import com.google.gerrit.httpd.AllRequestFilter;
 import com.google.gerrit.server.events.CommitReceivedEvent;
 import com.google.gerrit.server.git.validators.CommitValidationException;
 import com.google.gerrit.server.git.validators.CommitValidationListener;
 import com.google.gerrit.server.git.validators.CommitValidationMessage;
 import com.google.inject.Singleton;
+import java.io.IOException;
 import java.util.List;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Singleton
-class ReadOnly implements CommitValidationListener {
+class ReadOnly extends AllRequestFilter implements CommitValidationListener {
   private static final String READ_ONLY_MSG = "Gerrit is under maintenance - all data is READ ONLY";
 
   @Override
   public List<CommitValidationMessage> onCommitReceived(CommitReceivedEvent receiveEvent)
       throws CommitValidationException {
     throw new CommitValidationException(READ_ONLY_MSG);
+  }
+
+  @Override
+  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+      throws IOException, ServletException {
+    if ((request instanceof HttpServletRequest) && (response instanceof HttpServletResponse)) {
+      String method = ((HttpServletRequest) request).getMethod();
+      if (method == "POST" || method == "PUT" || method == "DELETE") {
+        ((HttpServletResponse) response).sendError(SC_SERVICE_UNAVAILABLE, READ_ONLY_MSG);
+        return;
+      }
+    }
+    chain.doFilter(request, response);
   }
 }
