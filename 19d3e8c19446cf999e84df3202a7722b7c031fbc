@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f850cdcb_c67ae90c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2018-02-20T15:35:02Z",
+      "side": 1,
+      "message": "/running/loaded/\n\nThe Groovy scripting is not technically \"running\" but it is only a provider of Server-side plugins. It gets involved only on the plugin loading and scanning phase. It has no impact in terms of performance :-)",
+      "range": {
+        "startLine": 12,
+        "startChar": 28,
+        "endLine": 12,
+        "endChar": 49
+      },
+      "revId": "19d3e8c19446cf999e84df3202a7722b7c031fbc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79752dfa_b2db853e",
+        "filename": "tools/bzl/BUILD",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2018-02-20T15:35:02Z",
+      "side": 1,
+      "message": "Is this empty on purpose?",
+      "revId": "19d3e8c19446cf999e84df3202a7722b7c031fbc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
