@@ -93,6 +93,30 @@
       "revId": "d9601f15f22339d95f7a05439f8c7017c5425188",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "374e43ec_d2246541",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/ReadOnly.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-21T05:41:57Z",
+      "side": 1,
+      "message": "Login works as expected, at least with the development become any account auth.  I haven\u0027t tried with any other yet.\n\nIsn\u0027t it actually only creation of new accounts on first login that will be blocked?  That is probably what we want though, isn\u0027t it?  If the server is read only we shouldn\u0027t be creating new accounts.",
+      "parentUuid": "e7bbbaff_fe2d4f01",
+      "range": {
+        "startLine": 49,
+        "startChar": 10,
+        "endLine": 49,
+        "endChar": 67
+      },
+      "revId": "d9601f15f22339d95f7a05439f8c7017c5425188",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
