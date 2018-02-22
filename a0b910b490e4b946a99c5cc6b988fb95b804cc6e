@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "052012ee_a4648ccf",
+        "filename": "tools/bzl/plugin.bzl",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2018-02-22T01:14:06Z",
+      "side": 1,
+      "message": "this is not needed for that plugin, can be removed",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 22
+      },
+      "revId": "a0b910b490e4b946a99c5cc6b988fb95b804cc6e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
