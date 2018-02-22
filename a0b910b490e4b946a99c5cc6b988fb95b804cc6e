@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5a823bfc_1fa26e14",
+        "filename": ".gitignore",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-22T01:30:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5901a82f_0b59cff4",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 7
+      },
+      "revId": "a0b910b490e4b946a99c5cc6b988fb95b804cc6e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "052012ee_a4648ccf",
         "filename": "tools/bzl/plugin.bzl",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2018-02-22T01:14:06Z",
       "side": 1,
       "message": "this is not needed for that plugin, can be removed",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 22
+      },
+      "revId": "a0b910b490e4b946a99c5cc6b988fb95b804cc6e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ab1848_99a57eae",
+        "filename": "tools/bzl/plugin.bzl",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-22T01:30:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "052012ee_a4648ccf",
       "range": {
         "startLine": 5,
         "startChar": 0,
