@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "eb7c66cc_58a24c60",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/ReadOnly.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-22T02:35:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "933dd8e1_cdfdc0ba",
+      "range": {
+        "startLine": 56,
+        "startChar": 40,
+        "endLine": 56,
+        "endChar": 45
+      },
+      "revId": "29760be088172eee0b80569f7cae7cebda66bd34",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ed48df5_86caf863",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/ReadOnly.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2018-02-22T02:32:30Z",
       "side": 1,
       "message": "unnecessary \u0027this.\u0027?",
+      "range": {
+        "startLine": 65,
+        "startChar": 75,
+        "endLine": 65,
+        "endChar": 80
+      },
+      "revId": "29760be088172eee0b80569f7cae7cebda66bd34",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f93d4fe1_8c9c4329",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/ReadOnly.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-22T02:35:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ed48df5_86caf863",
       "range": {
         "startLine": 65,
         "startChar": 75,
