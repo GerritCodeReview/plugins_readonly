@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "5901a82f_0b59cff4",
+        "filename": ".gitignore",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2018-02-22T01:27:07Z",
+      "side": 1,
+      "message": "[optional] use a leading slash to only exclude bazel-* from the root folder?\n\nI am normally doing that, see my modification in the following change: https://gerrit-review.googlesource.com/#/c/plugins/readonly/+/161310/1/.gitignore\n\nIf you prefer to not have a leading slashes, I will remove them from the following change for the sake of consistency.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 7
+      },
+      "revId": "a0b910b490e4b946a99c5cc6b988fb95b804cc6e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "052012ee_a4648ccf",
         "filename": "tools/bzl/plugin.bzl",
         "patchSetId": 4
