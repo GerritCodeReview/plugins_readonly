@@ -6,6 +6,7 @@ gerrit_plugin(
     manifest_entries = [
         "Gerrit-PluginName: readonly",
         "Gerrit-Module: com.googlesource.gerrit.plugins.readonly.Module",
+        "Gerrit-SshModule: com.googlesource.gerrit.plugins.readonly.SshModule",
         "Gerrit-HttpModule: com.googlesource.gerrit.plugins.readonly.HttpModule",
     ],
     resources = glob(["src/main/**/*"]),
