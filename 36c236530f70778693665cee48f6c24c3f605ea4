@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3aa2a07_50b93a38",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/HijackCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2018-02-28T09:30:16Z",
+      "side": 1,
+      "message": "s/Hijack/Disable/ ?",
+      "range": {
+        "startLine": 21,
+        "startChar": 13,
+        "endLine": 21,
+        "endChar": 26
+      },
+      "revId": "36c236530f70778693665cee48f6c24c3f605ea4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f99de838_49b4e7b4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/HijackCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2018-02-28T09:30:16Z",
+      "side": 1,
+      "message": "temporary disabled because the site is ready-only",
+      "range": {
+        "startLine": 24,
+        "startChar": 51,
+        "endLine": 24,
+        "endChar": 59
+      },
+      "revId": "36c236530f70778693665cee48f6c24c3f605ea4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
