@@ -93,6 +93,30 @@
       "revId": "36c236530f70778693665cee48f6c24c3f605ea4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64a2e7b2_e13693a9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/HijackCommand.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-28T10:11:31Z",
+      "side": 1,
+      "message": "This message should come from the config.",
+      "parentUuid": "4d0aecbb_e5157dd5",
+      "range": {
+        "startLine": 24,
+        "startChar": 51,
+        "endLine": 24,
+        "endChar": 59
+      },
+      "revId": "36c236530f70778693665cee48f6c24c3f605ea4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
