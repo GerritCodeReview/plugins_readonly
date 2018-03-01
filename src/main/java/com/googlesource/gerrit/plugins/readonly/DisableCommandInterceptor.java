@@ -42,7 +42,7 @@ public class DisableCommandInterceptor implements SshCreateCommandInterceptor {
       return in;
     }
 
-    log.warn("Disabling command: " + in);
+    log.warn("Disabling command: {}", in);
     return pluginName + " disable";
   }
 }
