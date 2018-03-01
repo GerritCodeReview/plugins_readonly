@@ -18,26 +18,30 @@ import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.sshd.SshCreateCommandInterceptor;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Singleton
 public class DisableCommandInterceptor implements SshCreateCommandInterceptor {
   private static final Logger log = LoggerFactory.getLogger(DisableCommandInterceptor.class);
+  private static final String PATTERN = "^gerrit plugin (\\brm\\b|\\bremove\\b) %s$";
 
   private final String pluginName;
+  private final Pattern pattern;
 
   @Inject
   DisableCommandInterceptor(@PluginName String pluginName) {
     this.pluginName = pluginName;
+    this.pattern = Pattern.compile(String.format(PATTERN, pluginName));
   }
 
   @Override
   public String intercept(String in) {
-    // Prevent disabling of plugin command to enable/disable plugins
-    if (in.startsWith("gerrit plugin")) {
+    if (pattern.matcher(in).matches()) {
       return in;
     }
+
     log.warn("Disabling command: " + in);
     return pluginName + " disable";
   }
