@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 @Singleton
 public class DisableCommandInterceptor implements SshCreateCommandInterceptor {
   private static final Logger log = LoggerFactory.getLogger(DisableCommandInterceptor.class);
-  private static final String PATTERN = "^gerrit plugin (\\brm\\b|\\bremove\\b) %s$";
+  private static final String PATTERN = "^gerrit plugin (\\brm\\b|\\bremove\\b|\\breload\\b) %s$";
 
   private final String pluginName;
   private final Pattern pattern;
