@@ -27,12 +27,12 @@ public class DisableCommandInterceptor implements SshCreateCommandInterceptor {
   private static final Logger log = LoggerFactory.getLogger(DisableCommandInterceptor.class);
   private static final String PATTERN = "^gerrit plugin (\\brm\\b|\\bremove\\b) %s$";
 
-  private final String pluginName;
+  private final String disableCommand;
   private final Pattern pattern;
 
   @Inject
   DisableCommandInterceptor(@PluginName String pluginName) {
-    this.pluginName = pluginName;
+    this.disableCommand = pluginName + " disable";
     this.pattern = Pattern.compile(String.format(PATTERN, pluginName));
   }
 
@@ -43,6 +43,6 @@ public class DisableCommandInterceptor implements SshCreateCommandInterceptor {
     }
 
     log.warn("Disabling command: {}", in);
-    return pluginName + " disable";
+    return disableCommand;
   }
 }
