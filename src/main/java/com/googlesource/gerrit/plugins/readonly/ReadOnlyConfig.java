@@ -27,16 +27,23 @@ class ReadOnlyConfig {
   private static final String MESSAGE_KEY = "message";
   private static final String DEFAULT_MESSAGE =
       "Gerrit is under maintenance - all data is READ ONLY";
+  private static final String SSH_ALLOW = "sshAllow";
 
   private final String message;
+  private final String[] sshAllows;
 
   @Inject
   ReadOnlyConfig(PluginConfigFactory pluginConfigFactory, @PluginName String pluginName) {
     Config cfg = pluginConfigFactory.getGlobalPluginConfig(pluginName);
     this.message = firstNonNull(cfg.getString(pluginName, null, MESSAGE_KEY), DEFAULT_MESSAGE);
+    sshAllows = cfg.getStringList(pluginName, null, SSH_ALLOW);
   }
 
   String message() {
     return message;
+  }
+
+  String[] sshAllows() {
+    return sshAllows;
   }
 }
