@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8a3e6a1a_4392fc2c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2018-04-12T23:49:47Z",
+      "side": 1,
+      "message": "I thought about that. However, the Config returns a String[] :-(",
+      "parentUuid": "e7aa49f9_3540025e",
+      "range": {
+        "startLine": 33,
+        "startChar": 16,
+        "endLine": 33,
+        "endChar": 24
+      },
+      "revId": "ae36faffbb1bfcb75bd7f30f11f371c750511d49",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "23caa0b0_a21e81fc",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "7b04910d_1c0feee2",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2018-04-12T23:49:47Z",
+      "side": 1,
+      "message": "Good point, more readable.",
+      "parentUuid": "23caa0b0_a21e81fc",
+      "range": {
+        "startLine": 23,
+        "startChar": 12,
+        "endLine": 23,
+        "endChar": 20
+      },
+      "revId": "ae36faffbb1bfcb75bd7f30f11f371c750511d49",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c8f33ef_287fb8c3",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 1
@@ -68,6 +116,30 @@
       "revId": "ae36faffbb1bfcb75bd7f30f11f371c750511d49",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a946197c_33f44dc3",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2018-04-12T23:49:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c8f33ef_287fb8c3",
+      "range": {
+        "startLine": 26,
+        "startChar": 32,
+        "endLine": 26,
+        "endChar": 44
+      },
+      "revId": "ae36faffbb1bfcb75bd7f30f11f371c750511d49",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
