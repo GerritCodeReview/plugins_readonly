@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "bb581c31_3a0b2b55",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2018-04-13T08:36:34Z",
+      "side": 1,
+      "message": "done with ImmutableList.copyOf()",
+      "parentUuid": "b9642797_cb8da8d9",
+      "range": {
+        "startLine": 33,
+        "startChar": 16,
+        "endLine": 33,
+        "endChar": 24
+      },
+      "revId": "ae36faffbb1bfcb75bd7f30f11f371c750511d49",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "23caa0b0_a21e81fc",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 1
