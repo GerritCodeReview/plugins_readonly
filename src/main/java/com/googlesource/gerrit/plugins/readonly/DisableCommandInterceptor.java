@@ -18,6 +18,8 @@ import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.sshd.SshCreateCommandInterceptor;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,17 +30,26 @@ public class DisableCommandInterceptor implements SshCreateCommandInterceptor {
   private static final String PATTERN = "^gerrit plugin (\\brm\\b|\\bremove\\b) %s$";
 
   private final String disableCommand;
-  private final Pattern pattern;
+  private final List<Pattern> allowPatterns = new ArrayList<>();
+  private final List<String> allowPrefixes = new ArrayList<>();
 
   @Inject
-  DisableCommandInterceptor(@PluginName String pluginName) {
+  DisableCommandInterceptor(@PluginName String pluginName, ReadOnlyConfig config) {
     this.disableCommand = pluginName + " disable";
-    this.pattern = Pattern.compile(String.format(PATTERN, pluginName));
+    allowPatterns.add(Pattern.compile(String.format(PATTERN, pluginName)));
+    for (String allow : config.allowSshCommands()) {
+      if (allow.startsWith("^")) {
+        allowPatterns.add(Pattern.compile(allow));
+      } else {
+        allowPrefixes.add(allow);
+      }
+    }
   }
 
   @Override
   public String intercept(String in) {
-    if (pattern.matcher(in).matches()) {
+    if (allowPrefixes.stream().anyMatch(p -> in.startsWith(p))
+        || allowPatterns.stream().anyMatch(p -> p.matcher(in).matches())) {
       return in;
     }
 
