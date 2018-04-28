@@ -34,6 +34,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Singleton
 class ReadOnly extends AllRequestFilter implements CommitValidationListener {
+  private static final String GIT_UPLOAD_PACK_PROTOCOL = "/git-upload-pack";
   private final ReadOnlyConfig config;
 
   @Inject
@@ -52,7 +53,10 @@ class ReadOnly extends AllRequestFilter implements CommitValidationListener {
       throws IOException, ServletException {
     if ((request instanceof HttpServletRequest) && (response instanceof HttpServletResponse)) {
       String method = ((HttpServletRequest) request).getMethod();
-      if (method == "POST" || method == "PUT" || method == "DELETE") {
+      String uri = ((HttpServletRequest) request).getRequestURI();
+      if ((method == "POST" && !uri.endsWith(GIT_UPLOAD_PACK_PROTOCOL))
+          || method == "PUT"
+          || method == "DELETE") {
         ((HttpServletResponse) response).sendError(SC_SERVICE_UNAVAILABLE, config.message());
         return;
       }
