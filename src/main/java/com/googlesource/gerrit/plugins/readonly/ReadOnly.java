@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.readonly;
 
 import static javax.servlet.http.HttpServletResponse.SC_SERVICE_UNAVAILABLE;
 
+import com.google.common.collect.ImmutableList;
 import com.google.gerrit.httpd.AllRequestFilter;
 import com.google.gerrit.server.events.CommitReceivedEvent;
 import com.google.gerrit.server.git.validators.CommitValidationException;
@@ -45,22 +46,30 @@ class ReadOnly extends AllRequestFilter implements CommitValidationListener {
   @Override
   public List<CommitValidationMessage> onCommitReceived(CommitReceivedEvent receiveEvent)
       throws CommitValidationException {
-    throw new CommitValidationException(config.message());
+    if (config.isReadOnly()) {
+      throw new CommitValidationException(config.message());
+    }
+    return ImmutableList.of();
   }
 
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
       throws IOException, ServletException {
-    if ((request instanceof HttpServletRequest) && (response instanceof HttpServletResponse)) {
-      String method = ((HttpServletRequest) request).getMethod();
-      String uri = ((HttpServletRequest) request).getRequestURI();
-      if (("POST".equals(method) && !uri.endsWith(GIT_UPLOAD_PACK_PROTOCOL))
-          || "PUT".equals(method)
-          || "DELETE".equals(method)) {
-        ((HttpServletResponse) response).sendError(SC_SERVICE_UNAVAILABLE, config.message());
-        return;
-      }
+    if (config.isReadOnly()
+        && request instanceof HttpServletRequest
+        && response instanceof HttpServletResponse
+        && shouldBlock((HttpServletRequest) request)) {
+      ((HttpServletResponse) response).sendError(SC_SERVICE_UNAVAILABLE, config.message());
+      return;
     }
     chain.doFilter(request, response);
+  }
+
+  private boolean shouldBlock(HttpServletRequest request) {
+    String method = request.getMethod();
+    String uri = request.getRequestURI();
+    return ("POST".equals(method) && !uri.endsWith(GIT_UPLOAD_PACK_PROTOCOL))
+        || "PUT".equals(method)
+        || "DELETE".equals(method);
   }
 }

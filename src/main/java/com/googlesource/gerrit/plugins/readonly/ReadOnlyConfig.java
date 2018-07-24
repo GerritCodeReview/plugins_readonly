@@ -19,8 +19,10 @@ import static com.google.common.base.MoreObjects.firstNonNull;
 import com.google.common.collect.ImmutableList;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.server.config.PluginConfigFactory;
+import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.io.File;
 import java.util.List;
 import org.eclipse.jgit.lib.Config;
 
@@ -30,15 +32,19 @@ class ReadOnlyConfig {
   private static final String DEFAULT_MESSAGE =
       "Gerrit is under maintenance - all data is READ ONLY";
   private static final String SSH_ALLOW = "allowSshCommand";
+  private static final String GERRIT_READONLY = "gerrit.readonly";
 
   private final String message;
   private final List<String> allowSshCommands;
+  private final File readOnlyMarker;
 
   @Inject
-  ReadOnlyConfig(PluginConfigFactory pluginConfigFactory, @PluginName String pluginName) {
+  ReadOnlyConfig(
+      PluginConfigFactory pluginConfigFactory, @PluginName String pluginName, SitePaths sitePaths) {
     Config cfg = pluginConfigFactory.getGlobalPluginConfig(pluginName);
     this.message = firstNonNull(cfg.getString(pluginName, null, MESSAGE_KEY), DEFAULT_MESSAGE);
-    allowSshCommands = ImmutableList.copyOf(cfg.getStringList(pluginName, null, SSH_ALLOW));
+    this.allowSshCommands = ImmutableList.copyOf(cfg.getStringList(pluginName, null, SSH_ALLOW));
+    this.readOnlyMarker = new File(sitePaths.etc_dir.toFile(), GERRIT_READONLY);
   }
 
   String message() {
@@ -47,5 +53,9 @@ class ReadOnlyConfig {
 
   List<String> allowSshCommands() {
     return allowSshCommands;
+  }
+
+  public boolean isReadOnly() {
+    return readOnlyMarker.exists();
   }
 }
