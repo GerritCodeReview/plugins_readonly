@@ -14,15 +14,7 @@
 
 package com.googlesource.gerrit.plugins.readonly;
 
-import com.google.gerrit.extensions.registration.DynamicSet;
-import com.google.gerrit.httpd.AllRequestFilter;
-import com.google.gerrit.httpd.plugins.HttpPluginModule;
-import com.google.inject.Scopes;
-
-public class HttpModule extends HttpPluginModule {
-  @Override
-  protected void configureServlets() {
-    install(ReadOnlyServlet.module());
-    DynamicSet.bind(binder(), AllRequestFilter.class).to(ReadOnly.class).in(Scopes.SINGLETON);
-  }
+public class Constants {
+  public static final String ENDPOINT = "/readonly";
+  public static final String GIT_UPLOAD_PACK_PROTOCOL = "/git-upload-pack";
 }

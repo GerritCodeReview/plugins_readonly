@@ -3,7 +3,8 @@ load("//tools/bzl:classpath.bzl", "classpath_collector")
 
 classpath_collector(
     name = "main_classpath_collect",
-    deps = PLUGIN_DEPS + [
-        "//:readonly__plugin",
+    testonly = 1,
+    deps = [
+        "//:readonly__plugin_test_deps",
     ],
 )
