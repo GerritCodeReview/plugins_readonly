@@ -54,9 +54,9 @@ class ReadOnly extends AllRequestFilter implements CommitValidationListener {
     if ((request instanceof HttpServletRequest) && (response instanceof HttpServletResponse)) {
       String method = ((HttpServletRequest) request).getMethod();
       String uri = ((HttpServletRequest) request).getRequestURI();
-      if ((method == "POST" && !uri.endsWith(GIT_UPLOAD_PACK_PROTOCOL))
-          || method == "PUT"
-          || method == "DELETE") {
+      if (("POST".equals(method) && !uri.endsWith(GIT_UPLOAD_PACK_PROTOCOL))
+          || "PUT".equals(method)
+          || "DELETE".equals(method)) {
         ((HttpServletResponse) response).sendError(SC_SERVICE_UNAVAILABLE, config.message());
         return;
       }
