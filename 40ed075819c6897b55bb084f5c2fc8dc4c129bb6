@@ -34,6 +34,127 @@
       "revId": "40ed075819c6897b55bb084f5c2fc8dc4c129bb6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e85cd4a5_802c5fb7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2018-07-31T15:52:12Z",
+      "side": 1,
+      "message": "Agreed: let me work on that follow-up command, which can be useful for us as well.",
+      "parentUuid": "c5ce7203_33b2fae4",
+      "revId": "40ed075819c6897b55bb084f5c2fc8dc4c129bb6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2132be0c_b5d310af",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2018-07-31T15:52:12Z",
+      "side": 1,
+      "message": "what about sitePaths.etc_dir.resolve(GERRIT_READONLY) ?",
+      "range": {
+        "startLine": 47,
+        "startChar": 26,
+        "endLine": 47,
+        "endChar": 79
+      },
+      "revId": "40ed075819c6897b55bb084f5c2fc8dc4c129bb6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e02098f5_210ff82e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2018-07-31T15:52:12Z",
+      "side": 1,
+      "message": "This method actually performs 3 tests:\n- Push should succeed by default\n- Push should fail when readonly is enabled\n- Push should succeed when readonly is disabled\n\nOne test should check one thing: would be best to break it down to three tests IMHO.",
+      "range": {
+        "startLine": 140,
+        "startChar": 15,
+        "endLine": 140,
+        "endChar": 28
+      },
+      "revId": "40ed075819c6897b55bb084f5c2fc8dc4c129bb6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc39d311_ba186cd8",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2018-07-31T15:52:12Z",
+      "side": 1,
+      "message": "Is this assertion needed? We are not checking Gerrit functionality here but only the fact that a command is accepted or rejected, isn\u0027t it?",
+      "revId": "40ed075819c6897b55bb084f5c2fc8dc4c129bb6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4f4b860_1c64e8d4",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2018-07-31T15:52:12Z",
+      "side": 1,
+      "message": "As above: checking that the command is successful should be fairly enough for the purpose of the readonly plugin.",
+      "revId": "40ed075819c6897b55bb084f5c2fc8dc4c129bb6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c83dfd7_87e4ce54",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2018-07-31T15:52:12Z",
+      "side": 1,
+      "message": "setReadOnly is more readable IMHO",
+      "range": {
+        "startLine": 173,
+        "startChar": 15,
+        "endLine": 173,
+        "endChar": 23
+      },
+      "revId": "40ed075819c6897b55bb084f5c2fc8dc4c129bb6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
