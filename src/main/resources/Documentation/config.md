@@ -26,3 +26,11 @@ be effective.
     Repeat with multiple values to allow more than one command or pattern
     of commands.
     The command 'gerrit plugin rm' or 'gerrit plugin remove' is always allowed.
+
+
+File gerrit.readonly
+--------------------
+
+Marker file used to enable or disable the read-only status. When present under
+the $GERRIT_SITE/etc directory, Gerrit is set to read-only and only read
+operations are enabled according to the readonly plugin configuration.
