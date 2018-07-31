@@ -78,6 +78,30 @@
     },
     {
       "key": {
+        "uuid": "3d268d28_98cc28c4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-07-31T15:57:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2132be0c_b5d310af",
+      "range": {
+        "startLine": 47,
+        "startChar": 26,
+        "endLine": 47,
+        "endChar": 79
+      },
+      "revId": "40ed075819c6897b55bb084f5c2fc8dc4c129bb6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e02098f5_210ff82e",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyIT.java",
         "patchSetId": 1
@@ -101,6 +125,30 @@
     },
     {
       "key": {
+        "uuid": "b31a0979_a4df9722",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-07-31T15:57:21Z",
+      "side": 1,
+      "message": "This is following the same pattern as the other two tests:\n\n- OK by default\n- Rejected after enabling read only\n- OK after disabling read only\n\nIf we split these into separate tests, we end up with a lot of repeated code.",
+      "parentUuid": "e02098f5_210ff82e",
+      "range": {
+        "startLine": 140,
+        "startChar": 15,
+        "endLine": 140,
+        "endChar": 28
+      },
+      "revId": "40ed075819c6897b55bb084f5c2fc8dc4c129bb6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fc39d311_ba186cd8",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyIT.java",
         "patchSetId": 1
@@ -112,6 +160,24 @@
       "writtenOn": "2018-07-31T15:52:12Z",
       "side": 1,
       "message": "Is this assertion needed? We are not checking Gerrit functionality here but only the fact that a command is accepted or rejected, isn\u0027t it?",
+      "revId": "40ed075819c6897b55bb084f5c2fc8dc4c129bb6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ddd4fe5_b2a70277",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-07-31T15:57:21Z",
+      "side": 1,
+      "message": "It\u0027s not really needed.  I can remove it.",
+      "parentUuid": "fc39d311_ba186cd8",
       "revId": "40ed075819c6897b55bb084f5c2fc8dc4c129bb6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
@@ -155,6 +221,30 @@
       "revId": "40ed075819c6897b55bb084f5c2fc8dc4c129bb6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fda3098b_739bc41d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-07-31T15:57:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5c83dfd7_87e4ce54",
+      "range": {
+        "startLine": 173,
+        "startChar": 15,
+        "endLine": 173,
+        "endChar": 23
+      },
+      "revId": "40ed075819c6897b55bb084f5c2fc8dc4c129bb6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
