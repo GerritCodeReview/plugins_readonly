@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "ab42e86a_7f294d39",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2018-07-31T16:05:39Z",
+      "side": 1,
+      "message": "Let me try that and see how it looks like. Will push into a separate follow-up change for review. For the time being, Ack with you.",
+      "parentUuid": "b31a0979_a4df9722",
+      "range": {
+        "startLine": 140,
+        "startChar": 15,
+        "endLine": 140,
+        "endChar": 28
+      },
+      "revId": "40ed075819c6897b55bb084f5c2fc8dc4c129bb6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fc39d311_ba186cd8",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyIT.java",
         "patchSetId": 1
