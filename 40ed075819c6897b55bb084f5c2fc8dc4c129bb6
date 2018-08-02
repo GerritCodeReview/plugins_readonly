@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "2ab7fbbb_2006193d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2018-08-02T17:20:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d268d28_98cc28c4",
+      "range": {
+        "startLine": 47,
+        "startChar": 26,
+        "endLine": 47,
+        "endChar": 79
+      },
+      "revId": "40ed075819c6897b55bb084f5c2fc8dc4c129bb6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e02098f5_210ff82e",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyIT.java",
         "patchSetId": 1
