@@ -18,6 +18,7 @@ import static com.google.gerrit.server.config.ConfigResource.CONFIG_KIND;
 
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.extensions.restapi.RestApiModule;
+import com.google.gerrit.extensions.webui.TopMenu;
 import com.google.gerrit.server.git.validators.CommitValidationListener;
 import com.google.inject.AbstractModule;
 
@@ -25,6 +26,7 @@ class Module extends AbstractModule {
   @Override
   protected void configure() {
     DynamicSet.bind(binder(), CommitValidationListener.class).to(ReadOnly.class);
+    DynamicSet.bind(binder(), TopMenu.class).to(ReadOnlyMenu.class);
     install(
         new RestApiModule() {
           @Override

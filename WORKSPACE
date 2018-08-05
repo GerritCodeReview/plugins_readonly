@@ -18,9 +18,19 @@ load(
 #    "@com_googlesource_gerrit_bazlets//:gerrit_api_maven_local.bzl",
 #    "gerrit_api_maven_local",
 #)
+load(
+    "@com_googlesource_gerrit_bazlets//:gerrit_gwt.bzl",
+    "gerrit_gwt",
+)
 
 # Load release Plugin API
 gerrit_api()
 
 # Load snapshot Plugin API
 #gerrit_api_maven_local()
+
+gerrit_gwt()
+
+load("//:external_plugin_deps.bzl", "external_plugin_deps")
+
+external_plugin_deps()

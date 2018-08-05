@@ -15,6 +15,8 @@
 package com.googlesource.gerrit.plugins.readonly;
 
 import com.google.gerrit.extensions.registration.DynamicSet;
+import com.google.gerrit.extensions.webui.GwtPlugin;
+import com.google.gerrit.extensions.webui.WebUiPlugin;
 import com.google.gerrit.httpd.AllRequestFilter;
 import com.google.gerrit.httpd.plugins.HttpPluginModule;
 import com.google.inject.Scopes;
@@ -23,5 +25,6 @@ public class HttpModule extends HttpPluginModule {
   @Override
   protected void configureServlets() {
     DynamicSet.bind(binder(), AllRequestFilter.class).to(ReadOnly.class).in(Scopes.SINGLETON);
+    DynamicSet.bind(binder(), WebUiPlugin.class).toInstance(new GwtPlugin("readonly"));
   }
 }
