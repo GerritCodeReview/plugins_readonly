@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f542aa0d_a043381a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyServlet.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-08-05T07:24:31Z",
+      "side": 1,
+      "message": "Why such low level implementation? Why not just use RestApiServlet and not implement RestModifyView and RestReadView interfaces for config resource? Doing that would have many advantages and simplify things in many aspects:\n\n* This is a standard way to expose REST endpoints in gerrit core and gerrit plugins\n* Capability checks are provided for granted using @RequiresCapability or even @RequiresAnyCapability, in case multiple capabilities should be supported, like ADMINISTRATE_SERVER, MAINTAIN_SERVER\n* SSH commands could be exposed, that delegates the actual actions to the REST endpoint implementations\n* REST endpoints could extend UiAction abstract class and could implement public UiAction.Description getDescription(ConfigResource resource) and this commands could be generically retrieved from the UI. Yes, for config resource we don\u0027t have any UI means, to generically retrieve core and plugin actions available for config resource and render buttons for each action, unfortunately. However, this could be done for plugin specific view, and instead of retrieving the current read only state, we could just GET plugins/readonly/actions and dependent on the state, either PutReadOnly or PutRead would be returned and rendered as button (mutually exclusive)\n* Unit tests could be easily implemented using LightweightPluginDaemonTest base class\n\nI went ahead and implemented the above proposal on top of this change: \"Use RestApiServlet and SSH commands for plugin actions\": [1]. Moreover I added SSH commands:\n\n* readonly (alias on)\n* ready (alias off)\n* state\n\nWith this CL we would have this SSH session: [2].\n\n* [1] http://paste.openstack.org/show/727348\n* [2] http://paste.openstack.org/show/727350",
+      "range": {
+        "startLine": 36,
+        "startChar": 37,
+        "endLine": 36,
+        "endChar": 48
+      },
+      "revId": "7348d4ab5845ef688b818e679c77c8ad420594bc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3c67ddf_b7866e5c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyServletTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-08-05T07:24:31Z",
+      "side": 1,
+      "message": "I very much appreciate your efforts to put integration tests for this plugin. I would prefer not to mix real tests using LightweightPluginDaemonTest and mocked tests using mockito or other mock frameworks. If you follow my suggestion to use RestApiServlet and SSH commands for plugin actions, I believe no mock tests are needed and all standard REST endpoint and SSH command tests could be easily implemented using LightweightPluginDaemonTest based tests.",
+      "revId": "7348d4ab5845ef688b818e679c77c8ad420594bc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
