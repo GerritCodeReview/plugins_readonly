@@ -41,12 +41,14 @@ class ReadOnly extends AllRequestFilter implements CommitValidationListener {
   private final ReadOnlyState state;
   private final ReadOnlyConfig config;
   private final String endpoint;
+  private final String endpoint2;
 
   @Inject
   ReadOnly(ReadOnlyState state, ReadOnlyConfig config, @PluginName String pluginName) {
     this.state = state;
     this.config = config;
     this.endpoint = pluginName + ENDPOINT;
+    this.endpoint2 = String.format("/config/server/%s~readonly", pluginName);
   }
 
   @Override
@@ -73,9 +75,10 @@ class ReadOnly extends AllRequestFilter implements CommitValidationListener {
 
   private boolean shouldBlock(HttpServletRequest request) {
     String method = request.getMethod();
-    String uri = request.getRequestURI();
-    return !uri.endsWith(endpoint)
-        && (("POST".equals(method) && !uri.endsWith(GIT_UPLOAD_PACK_PROTOCOL))
+    String servletPath = request.getServletPath();
+    return !servletPath.endsWith(endpoint)
+        && !servletPath.endsWith(endpoint2)
+        && (("POST".equals(method) && !servletPath.endsWith(GIT_UPLOAD_PACK_PROTOCOL))
             || "PUT".equals(method)
             || "DELETE".equals(method));
   }

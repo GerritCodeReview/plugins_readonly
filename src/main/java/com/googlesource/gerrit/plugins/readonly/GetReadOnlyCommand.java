@@ -14,24 +14,21 @@
 
 package com.googlesource.gerrit.plugins.readonly;
 
-import com.google.gerrit.extensions.registration.DynamicItem;
-import com.google.gerrit.sshd.PluginCommandModule;
-import com.google.gerrit.sshd.SshCreateCommandInterceptor;
+import static com.google.gerrit.common.data.GlobalCapability.ADMINISTRATE_SERVER;
+import static com.google.gerrit.common.data.GlobalCapability.MAINTAIN_SERVER;
 
-public class SshModule extends PluginCommandModule {
+import com.google.gerrit.extensions.annotations.RequiresAnyCapability;
+import com.google.gerrit.sshd.CommandMetaData;
+import com.google.gerrit.sshd.SshCommand;
+import com.google.inject.Inject;
+
+@RequiresAnyCapability({ADMINISTRATE_SERVER, MAINTAIN_SERVER})
+@CommandMetaData(name = "get", description = "Show read only mode state")
+class GetReadOnlyCommand extends SshCommand {
+  @Inject ReadOnlyEndpoint.Get get;
+
   @Override
-  protected void configureCommands() {
-    DynamicItem.bind(binder(), SshCreateCommandInterceptor.class)
-        .to(DisableCommandInterceptor.class);
-    command(DisableCommand.class);
-
-    command(PutReadOnlyCommand.class);
-    alias("on", PutReadOnlyCommand.class);
-
-    command(DeleteReadOnlyCommand.class);
-    alias("off", DeleteReadOnlyCommand.class);
-
-    command(GetReadOnlyCommand.class);
-    alias("status", GetReadOnlyCommand.class);
+  protected void run() {
+    stdout.println(get.apply(null));
   }
 }
