@@ -14,7 +14,10 @@
 
 package com.googlesource.gerrit.plugins.readonly;
 
+import static com.google.gerrit.server.config.ConfigResource.CONFIG_KIND;
+
 import com.google.gerrit.extensions.registration.DynamicSet;
+import com.google.gerrit.extensions.restapi.RestApiModule;
 import com.google.gerrit.server.git.validators.CommitValidationListener;
 import com.google.inject.AbstractModule;
 
@@ -22,5 +25,14 @@ class Module extends AbstractModule {
   @Override
   protected void configure() {
     DynamicSet.bind(binder(), CommitValidationListener.class).to(ReadOnly.class);
+    install(
+        new RestApiModule() {
+          @Override
+          protected void configure() {
+            put(CONFIG_KIND, "readonly").to(PutReadOnly.class);
+            put(CONFIG_KIND, "ready").to(PutReady.class);
+            get(CONFIG_KIND, "state").to(GetState.class);
+          }
+        });
   }
 }
