@@ -41,12 +41,14 @@ class ReadOnly extends AllRequestFilter implements CommitValidationListener {
   private final ReadOnlyState state;
   private final ReadOnlyConfig config;
   private final String endpoint;
+  private final String pluginName;
 
   @Inject
   ReadOnly(ReadOnlyState state, ReadOnlyConfig config, @PluginName String pluginName) {
     this.state = state;
     this.config = config;
     this.endpoint = pluginName + ENDPOINT;
+    this.pluginName = pluginName;
   }
 
   @Override
@@ -65,8 +67,13 @@ class ReadOnly extends AllRequestFilter implements CommitValidationListener {
         && request instanceof HttpServletRequest
         && response instanceof HttpServletResponse
         && shouldBlock((HttpServletRequest) request)) {
-      ((HttpServletResponse) response).sendError(SC_SERVICE_UNAVAILABLE, config.message());
-      return;
+      HttpServletRequest servletRequest = (HttpServletRequest) request;
+      String servletPath = servletRequest.getServletPath();
+      // Allow all requests from this plugin
+      if (!servletPath.startsWith(String.format("/config/server/%s~", pluginName))) {
+        ((HttpServletResponse) response).sendError(SC_SERVICE_UNAVAILABLE, config.message());
+        return;
+      }
     }
     chain.doFilter(request, response);
   }

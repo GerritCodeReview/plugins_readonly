@@ -1,0 +1,51 @@
+.readonly-panel {
+  border-spacing: 0px 5px;
+}
+
+.readonly-readOnlyInfoTable {
+  margin-bottom: 10px;
+}
+
+.readonly-toggleButton {
+  position: relative;
+  height: 19px;
+  width: 140px;
+  background: #FFF;
+  color: #000;
+  text-shadow: none;
+  border: 1px solid #EEE !important;
+}
+
+.readonly-toggleButton .html-face {
+  position: absolute;
+  top: 0;
+  width: 68px;
+  height: 17px;
+  line-height: 17px;
+  text-align: center;
+  border-width: 1px;
+}
+
+.readonly-toggleButton-up,
+.readonly-toggleButton-up-hovering,
+.readonly-toggleButton-up-disabled,
+.readonly-toggleButton-down,
+.readonly-toggleButton-down-hovering,
+.readonly-toggleButton-down-disabled {
+  padding: 0;
+  border: 0;
+}
+
+.readonly-toggleButton-up .html-face,
+.readonly-toggleButton-up-hovering .html-face {
+  left: 0;
+  background: #FCB;
+  border-style: outset;
+}
+
+.readonly-toggleButton-down .html-face,
+.readonly-toggleButton-down-hovering .html-face {
+  right: 0;
+  background: #BFC;
+  border-style: inset;
+}
