@@ -15,7 +15,7 @@ gerrit_plugin(
         "Gerrit-SshModule: com.googlesource.gerrit.plugins.readonly.SshModule",
         "Gerrit-HttpModule: com.googlesource.gerrit.plugins.readonly.HttpModule",
     ],
-    resources = glob(["src/main/**/*"]),
+    resources = glob(["src/main/resources/**/*"]),
 )
 
 junit_tests(
