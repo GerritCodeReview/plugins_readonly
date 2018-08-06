@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56aa2764_2f9e87d2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/Module.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-08-06T19:44:13Z",
+      "side": 1,
+      "message": "As far as I understand, this creates 3 new endpoints:\n\n $site/config/readonly\n $site/config/ready\n $site/config/state\n\nwhich is another of the reasons why I implemented it with a separate servlet on the root URL.  I didn\u0027t want to introduce that complexity, but rather have the single endpoint at /readonly",
+      "revId": "fb389bbdabfff02e56a3a615832afa4197fccf78",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
