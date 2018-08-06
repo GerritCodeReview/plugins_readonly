@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1f30828b_06134cec",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyServlet.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-08-06T11:58:41Z",
+      "side": 1,
+      "message": "Thanks for the review and suggestion.\n\nI did this based on the health endpoint implementation in the high-availability plugin.  I was originally going to do it as a gerrit plugin endpoint as you describe, but couldn\u0027t see a way to bind it to the plugin\u0027s root URL as is done in this implementation.  Maybe I missed something though, if you\u0027ve been able to do it.\n\nWill you push your change for review?\n\nNote that I\u0027m on vacation this week, so there will be delay in my responses.",
+      "parentUuid": "f542aa0d_a043381a",
+      "range": {
+        "startLine": 36,
+        "startChar": 37,
+        "endLine": 36,
+        "endChar": 48
+      },
+      "revId": "7348d4ab5845ef688b818e679c77c8ad420594bc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f3c67ddf_b7866e5c",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyServletTest.java",
         "patchSetId": 4
