@@ -34,6 +34,24 @@
       "revId": "fb389bbdabfff02e56a3a615832afa4197fccf78",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "922e10f0_3b8834d8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/Module.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-08-07T09:26:31Z",
+      "side": 1,
+      "message": "I would prefer a single endpoint but I\u0027m not going to block this change if anyone else prefers to keep them separate.",
+      "parentUuid": "47e21341_85c29b1b",
+      "revId": "fb389bbdabfff02e56a3a615832afa4197fccf78",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
