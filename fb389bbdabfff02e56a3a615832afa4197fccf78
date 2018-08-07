@@ -16,6 +16,24 @@
       "revId": "fb389bbdabfff02e56a3a615832afa4197fccf78",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47e21341_85c29b1b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/Module.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-08-07T04:56:44Z",
+      "side": 1,
+      "message": "Current implementation exposes 3 endpoints:\n\n* GET /config/server/readonly~state\n* PUT /config/server/readonly~readonly\n* PUT /config/server/readonly~ready\n\nI assumed that having separate endpoint is more clear. If wanted they can be re-written in the way, you did in standalone servlet implementation:\n\n* GET /config/server/readonly~readonly\n* PUT /config/server/readonly~readonly\n* DELETE /config/server/readonly~readonly\n\nRestApiServlet supports all that.",
+      "parentUuid": "56aa2764_2f9e87d2",
+      "revId": "fb389bbdabfff02e56a3a615832afa4197fccf78",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
