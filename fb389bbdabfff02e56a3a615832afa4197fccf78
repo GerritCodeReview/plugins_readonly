@@ -52,6 +52,24 @@
       "revId": "fb389bbdabfff02e56a3a615832afa4197fccf78",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3fed32a_5bc4b807",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/Module.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2018-08-07T09:36:09Z",
+      "side": 1,
+      "message": "I have no strong opinion on single vs multiple endpoints so for me it resolves to question if we can write efficient filter for that.\nFor me it looks easier to write filter that does:\n\n  path.endsWith(\"config/server/readonly~readonly\")\n\nand I can imagine that it should be also quite fast to evaluate - if having dedicated endpoints mean that we are giving some efficiency then you have your answer ;) hope that is not making things harder to decide :D",
+      "parentUuid": "922e10f0_3b8834d8",
+      "revId": "fb389bbdabfff02e56a3a615832afa4197fccf78",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
