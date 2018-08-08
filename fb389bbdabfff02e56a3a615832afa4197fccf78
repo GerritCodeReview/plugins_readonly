@@ -70,6 +70,24 @@
       "revId": "fb389bbdabfff02e56a3a615832afa4197fccf78",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76b1c12a_d32d68e7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/Module.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-08-08T20:12:49Z",
+      "side": 1,
+      "message": "\u003e I would prefer a single endpoint but I\u0027m not going to block this change if anyone else prefers to keep them separate.\n\nI merged three endpoint to one single endpoint. Done.\n\n\u003e I have no strong opinion on single vs multiple endpoints so for me it resolves to question if we can write efficient filter for that.\n\nWe can even say that:\n\n  servletPath.equals(\"/config/server/readonly~readonly\")\n\nI moved that filter extension to this change. Done.",
+      "parentUuid": "e3fed32a_5bc4b807",
+      "revId": "fb389bbdabfff02e56a3a615832afa4197fccf78",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
