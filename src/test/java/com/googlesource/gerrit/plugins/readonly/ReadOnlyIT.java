@@ -161,9 +161,9 @@ public class ReadOnlyIT extends LightweightPluginDaemonTest {
 
   private void setReadOnly(boolean readOnly) throws Exception {
     if (readOnly) {
-      adminRestSession.post("/plugins/readonly/readonly").assertNoContent();
+      adminRestSession.put("/config/server/readonly~readonly").assertOK();
     } else {
-      adminRestSession.delete("/plugins/readonly/readonly").assertNoContent();
+      adminRestSession.delete("/config/server/readonly~readonly").assertOK();
     }
   }
 }

@@ -14,8 +14,6 @@
 
 package com.googlesource.gerrit.plugins.readonly;
 
-import static com.googlesource.gerrit.plugins.readonly.Constants.ENDPOINT;
-import static com.googlesource.gerrit.plugins.readonly.Constants.GIT_UPLOAD_PACK_PROTOCOL;
 import static javax.servlet.http.HttpServletResponse.SC_SERVICE_UNAVAILABLE;
 
 import com.google.common.collect.ImmutableList;
@@ -38,17 +36,17 @@ import javax.servlet.http.HttpServletResponse;
 
 @Singleton
 class ReadOnly extends AllRequestFilter implements CommitValidationListener {
+  private static final String GIT_UPLOAD_PACK_PROTOCOL = "/git-upload-pack";
+
   private final ReadOnlyState state;
   private final ReadOnlyConfig config;
   private final String endpoint;
-  private final String endpoint2;
 
   @Inject
   ReadOnly(ReadOnlyState state, ReadOnlyConfig config, @PluginName String pluginName) {
     this.state = state;
     this.config = config;
-    this.endpoint = pluginName + ENDPOINT;
-    this.endpoint2 = String.format("/config/server/%s~readonly", pluginName);
+    this.endpoint = String.format("/config/server/%s~readonly", pluginName);
   }
 
   @Override
@@ -76,8 +74,7 @@ class ReadOnly extends AllRequestFilter implements CommitValidationListener {
   private boolean shouldBlock(HttpServletRequest request) {
     String method = request.getMethod();
     String servletPath = request.getServletPath();
-    return !servletPath.equals(endpoint)
-        && !servletPath.equals(endpoint2)
+    return !servletPath.endsWith(endpoint)
         && (("POST".equals(method) && !servletPath.equals(GIT_UPLOAD_PACK_PROTOCOL))
             || "PUT".equals(method)
             || "DELETE".equals(method));
