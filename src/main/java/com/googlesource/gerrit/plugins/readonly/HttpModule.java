@@ -22,7 +22,6 @@ import com.google.inject.Scopes;
 public class HttpModule extends HttpPluginModule {
   @Override
   protected void configureServlets() {
-    install(ReadOnlyServlet.module());
     DynamicSet.bind(binder(), AllRequestFilter.class).to(ReadOnly.class).in(Scopes.SINGLETON);
   }
 }

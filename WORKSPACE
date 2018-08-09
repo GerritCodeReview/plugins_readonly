@@ -24,7 +24,3 @@ gerrit_api()
 
 # Load snapshot Plugin API
 #gerrit_api_maven_local()
-
-load("//:external_plugin_deps.bzl", "external_plugin_deps")
-
-external_plugin_deps()
