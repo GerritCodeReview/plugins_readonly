@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1f398fd_ea435bdf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/ReadOnly.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-08-10T04:29:38Z",
+      "side": 0,
+      "message": "Was that change from equals to endsWith intentional? Note that I changed from requestUri to servletPath, so that equals should just work.",
+      "range": {
+        "startLine": 79,
+        "startChar": 24,
+        "endLine": 79,
+        "endChar": 30
+      },
+      "revId": "64a0428d16566354c13d933ecfa374ad98e586a6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
