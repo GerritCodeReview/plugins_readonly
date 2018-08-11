@@ -29,14 +29,16 @@ import com.google.gerrit.server.change.PutTopic;
 import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore
 @TestPlugin(
     name = "readonly",
     sysModule = "com.googlesource.gerrit.plugins.readonly.Module",
     httpModule = "com.googlesource.gerrit.plugins.readonly.HttpModule",
     sshModule = "com.googlesource.gerrit.plugins.readonly.SshModule")
-public class ReadOnlyIT extends LightweightPluginDaemonTest {
+public abstract class AbstractReadOnlyTest extends LightweightPluginDaemonTest {
   @Test
   @UseLocalDisk
   public void restRequestsAreRejectedWhenReadOnly() throws Exception {
@@ -159,11 +161,5 @@ public class ReadOnlyIT extends LightweightPluginDaemonTest {
     pushTo("refs/for/master").assertOkStatus();
   }
 
-  private void setReadOnly(boolean readOnly) throws Exception {
-    if (readOnly) {
-      adminRestSession.put("/config/server/readonly~readonly").assertOK();
-    } else {
-      adminRestSession.delete("/config/server/readonly~readonly").assertOK();
-    }
-  }
+  protected abstract void setReadOnly(boolean readOnly) throws Exception;
 }
