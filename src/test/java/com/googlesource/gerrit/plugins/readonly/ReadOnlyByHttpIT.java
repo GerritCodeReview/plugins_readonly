@@ -14,6 +14,10 @@
 
 package com.googlesource.gerrit.plugins.readonly;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import com.google.gerrit.acceptance.RestResponse;
+
 public class ReadOnlyByHttpIT extends AbstractReadOnlyTest {
   @Override
   protected void setReadOnly(boolean readOnly) throws Exception {
@@ -22,5 +26,9 @@ public class ReadOnlyByHttpIT extends AbstractReadOnlyTest {
     } else {
       adminRestSession.delete("/config/server/readonly~readonly").assertOK();
     }
+    RestResponse response = adminRestSession.get("/config/server/readonly~readonly");
+    response.assertOK();
+    String expectedStatus = readOnly ? "on" : "off";
+    assertThat(response.getEntityContent()).containsMatch(expectedStatus);
   }
 }
