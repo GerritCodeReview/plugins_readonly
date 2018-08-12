@@ -24,8 +24,8 @@ import com.google.inject.Inject;
 import java.io.IOException;
 
 @RequiresAnyCapability({ADMINISTRATE_SERVER, MAINTAIN_SERVER})
-@CommandMetaData(name = "put", description = "Enable read only mode")
-class PutReadOnlyCommand extends SshCommand {
+@CommandMetaData(name = "enable", description = "Enable read only mode")
+class EnableReadOnlyCommand extends SshCommand {
   @Inject ReadOnlyEndpoint.Put put;
 
   @Override

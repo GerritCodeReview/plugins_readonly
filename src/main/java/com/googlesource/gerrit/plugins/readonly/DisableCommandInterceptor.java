@@ -38,7 +38,7 @@ public class DisableCommandInterceptor implements SshCreateCommandInterceptor {
   DisableCommandInterceptor(
       @PluginName String pluginName, ReadOnlyConfig config, ReadOnlyState state) {
     this.state = state;
-    this.disableCommand = pluginName + " disable";
+    this.disableCommand = pluginName + " disabled";
     allowPatterns.add(Pattern.compile(String.format(PATTERN, pluginName)));
     // Allow all SSH commands from this plugin
     allowPrefixes.add(pluginName);

@@ -20,7 +20,7 @@ import com.google.gerrit.sshd.CommandMetaData;
 import com.google.gerrit.sshd.SshCommand;
 import com.google.inject.Inject;
 
-@CommandMetaData(name = "disable", description = "Disable ssh commands", runsAt = MASTER_OR_SLAVE)
+@CommandMetaData(name = "disabled", description = "Disable ssh commands", runsAt = MASTER_OR_SLAVE)
 class DisableCommand extends SshCommand {
   @Inject ReadOnlyConfig config;
 

@@ -24,8 +24,8 @@ import com.google.inject.Inject;
 import java.io.IOException;
 
 @RequiresAnyCapability({ADMINISTRATE_SERVER, MAINTAIN_SERVER})
-@CommandMetaData(name = "delete", description = "Disable read only mode")
-class DeleteReadOnlyCommand extends SshCommand {
+@CommandMetaData(name = "disable", description = "Disable read only mode")
+class DisableReadOnlyCommand extends SshCommand {
   @Inject ReadOnlyEndpoint.Delete delete;
 
   @Override

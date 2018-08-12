@@ -25,13 +25,13 @@ public class SshModule extends PluginCommandModule {
         .to(DisableCommandInterceptor.class);
     command(DisableCommand.class);
 
-    command(PutReadOnlyCommand.class);
-    alias("on", PutReadOnlyCommand.class);
+    command(EnableReadOnlyCommand.class);
+    alias("on", EnableReadOnlyCommand.class);
 
-    command(DeleteReadOnlyCommand.class);
-    alias("off", DeleteReadOnlyCommand.class);
+    command(DisableReadOnlyCommand.class);
+    alias("off", DisableReadOnlyCommand.class);
 
-    command(GetReadOnlyCommand.class);
-    alias("status", GetReadOnlyCommand.class);
+    command(GetReadOnlyStatusCommand.class);
+    alias("get", GetReadOnlyStatusCommand.class);
   }
 }

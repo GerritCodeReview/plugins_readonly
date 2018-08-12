@@ -22,12 +22,13 @@ import com.google.gerrit.acceptance.UseSsh;
 public class ReadOnlyBySshIT extends AbstractReadOnlyTest {
   @Override
   protected void setReadOnly(boolean readOnly) throws Exception {
+    String command = readOnly ? "enable" : "disable";
     String expectedStatus = readOnly ? "on" : "off";
 
-    adminSshSession.exec("readonly " + expectedStatus);
+    adminSshSession.exec("readonly " + command);
     adminSshSession.assertSuccess();
 
-    String result = adminSshSession.exec("readonly get");
+    String result = adminSshSession.exec("readonly status");
     assertThat(result).contains(expectedStatus);
   }
 }

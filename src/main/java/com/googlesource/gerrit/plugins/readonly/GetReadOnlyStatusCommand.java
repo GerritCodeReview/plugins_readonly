@@ -23,8 +23,8 @@ import com.google.gerrit.sshd.SshCommand;
 import com.google.inject.Inject;
 
 @RequiresAnyCapability({ADMINISTRATE_SERVER, MAINTAIN_SERVER})
-@CommandMetaData(name = "get", description = "Show read only mode state")
-class GetReadOnlyCommand extends SshCommand {
+@CommandMetaData(name = "status", description = "Show read only mode state")
+class GetReadOnlyStatusCommand extends SshCommand {
   @Inject ReadOnlyEndpoint.Get get;
 
   @Override
