@@ -22,6 +22,30 @@
       "revId": "602e67b126643971fdff07a3d05bf38c084ca6ff",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d79a20c_9f718abc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/GetReadOnlyStatusCommand.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-08-13T07:50:57Z",
+      "side": 1,
+      "message": "I named it like this because it seems more natural.",
+      "parentUuid": "271dc1fb_9dc865cb",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 27,
+        "endChar": 30
+      },
+      "revId": "602e67b126643971fdff07a3d05bf38c084ca6ff",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
