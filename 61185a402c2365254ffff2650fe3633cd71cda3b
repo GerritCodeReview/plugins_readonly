@@ -46,6 +46,30 @@
       "revId": "61185a402c2365254ffff2650fe3633cd71cda3b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1248f012_ba964cc8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/ReadOnly.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-08-22T05:39:49Z",
+      "side": 1,
+      "message": "\u003e Not for covering all the login cases: the LdapServlet login serves any /login/* URLs.\n\nWouldn\u0027t !servletPath.startsWith(LOGIN_PREFIX) from my example above match any /login/* URLs?",
+      "parentUuid": "3e01f230_4bc27924",
+      "range": {
+        "startLine": 82,
+        "startChar": 16,
+        "endLine": 83,
+        "endChar": 54
+      },
+      "revId": "61185a402c2365254ffff2650fe3633cd71cda3b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
