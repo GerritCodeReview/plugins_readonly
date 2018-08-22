@@ -22,6 +22,30 @@
       "revId": "61185a402c2365254ffff2650fe3633cd71cda3b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e01f230_4bc27924",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/ReadOnly.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2018-08-22T05:33:17Z",
+      "side": 1,
+      "message": "\u003e Wouldn\u0027t be enough to just check !servletPath.startsWith(LOGIN_PREFIX)?\n\nNot for covering all the login cases: the LdapServlet login serves any /login/* URLs.",
+      "parentUuid": "48f003f3_88900fca",
+      "range": {
+        "startLine": 82,
+        "startChar": 16,
+        "endLine": 83,
+        "endChar": 54
+      },
+      "revId": "61185a402c2365254ffff2650fe3633cd71cda3b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
