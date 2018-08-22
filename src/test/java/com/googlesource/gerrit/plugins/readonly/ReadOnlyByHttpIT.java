@@ -14,18 +14,21 @@
 
 package com.googlesource.gerrit.plugins.readonly;
 
-import static com.google.gerrit.sshd.CommandMetaData.Mode.MASTER_OR_SLAVE;
+import static com.google.common.truth.Truth.assertThat;
 
-import com.google.gerrit.sshd.CommandMetaData;
-import com.google.gerrit.sshd.SshCommand;
-import com.google.inject.Inject;
+import com.google.gerrit.acceptance.RestResponse;
 
-@CommandMetaData(name = "disabled", description = "Disable ssh commands", runsAt = MASTER_OR_SLAVE)
-class DisableCommand extends SshCommand {
-  @Inject ReadOnlyConfig config;
-
+public class ReadOnlyByHttpIT extends AbstractReadOnlyTest {
   @Override
-  protected void run() throws UnloggedFailure {
-    throw new UnloggedFailure(1, "SSH subsystem is temporarily disabled: " + config.message());
+  protected void setReadOnly(boolean readOnly) throws Exception {
+    if (readOnly) {
+      adminRestSession.put("/config/server/readonly~readonly").assertOK();
+    } else {
+      adminRestSession.delete("/config/server/readonly~readonly").assertOK();
+    }
+    RestResponse response = adminRestSession.get("/config/server/readonly~readonly");
+    response.assertOK();
+    String expectedStatus = readOnly ? "on" : "off";
+    assertThat(response.getEntityContent()).contains(expectedStatus);
   }
 }

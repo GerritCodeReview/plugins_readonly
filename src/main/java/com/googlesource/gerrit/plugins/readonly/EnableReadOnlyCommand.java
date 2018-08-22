@@ -14,18 +14,22 @@
 
 package com.googlesource.gerrit.plugins.readonly;
 
-import static com.google.gerrit.sshd.CommandMetaData.Mode.MASTER_OR_SLAVE;
+import static com.google.gerrit.common.data.GlobalCapability.ADMINISTRATE_SERVER;
+import static com.google.gerrit.common.data.GlobalCapability.MAINTAIN_SERVER;
 
+import com.google.gerrit.extensions.annotations.RequiresAnyCapability;
 import com.google.gerrit.sshd.CommandMetaData;
 import com.google.gerrit.sshd.SshCommand;
 import com.google.inject.Inject;
+import java.io.IOException;
 
-@CommandMetaData(name = "disabled", description = "Disable ssh commands", runsAt = MASTER_OR_SLAVE)
-class DisableCommand extends SshCommand {
-  @Inject ReadOnlyConfig config;
+@RequiresAnyCapability({ADMINISTRATE_SERVER, MAINTAIN_SERVER})
+@CommandMetaData(name = "enable", description = "Enable read only mode")
+class EnableReadOnlyCommand extends SshCommand {
+  @Inject ReadOnlyEndpoint.Put put;
 
   @Override
-  protected void run() throws UnloggedFailure {
-    throw new UnloggedFailure(1, "SSH subsystem is temporarily disabled: " + config.message());
+  protected void run() throws IOException {
+    put.apply(null, null);
   }
 }
