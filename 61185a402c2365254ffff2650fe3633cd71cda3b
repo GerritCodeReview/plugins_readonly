@@ -70,6 +70,30 @@
       "revId": "61185a402c2365254ffff2650fe3633cd71cda3b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ecfebf_0de45404",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/ReadOnly.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2018-08-22T17:20:50Z",
+      "side": 1,
+      "message": "\u003e \u003e Not for covering all the login cases: the LdapServlet login serves any /login/* URLs.\n\u003e \n\u003e Wouldn\u0027t !servletPath.startsWith(LOGIN_PREFIX) from my example above match any /login/* URLs?\n\nGotcha, the startsWith() is way too much, you would match as well /loginMyCustomPluginURL which is not what you want.",
+      "parentUuid": "1248f012_ba964cc8",
+      "range": {
+        "startLine": 82,
+        "startChar": 16,
+        "endLine": 83,
+        "endChar": 54
+      },
+      "revId": "61185a402c2365254ffff2650fe3633cd71cda3b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
