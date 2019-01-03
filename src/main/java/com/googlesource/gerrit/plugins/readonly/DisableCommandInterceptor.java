@@ -29,14 +29,19 @@ public class DisableCommandInterceptor implements SshCreateCommandInterceptor {
   private static final Logger log = LoggerFactory.getLogger(DisableCommandInterceptor.class);
   private static final String PATTERN = "^gerrit plugin (\\brm\\b|\\bremove\\b) %s$";
 
+  private final ReadOnlyState state;
   private final String disableCommand;
   private final List<Pattern> allowPatterns = new ArrayList<>();
   private final List<String> allowPrefixes = new ArrayList<>();
 
   @Inject
-  DisableCommandInterceptor(@PluginName String pluginName, ReadOnlyConfig config) {
-    this.disableCommand = pluginName + " disable";
+  DisableCommandInterceptor(
+      @PluginName String pluginName, ReadOnlyConfig config, ReadOnlyState state) {
+    this.state = state;
+    this.disableCommand = pluginName + " disabled";
     allowPatterns.add(Pattern.compile(String.format(PATTERN, pluginName)));
+    // Allow all SSH commands from this plugin
+    allowPrefixes.add(pluginName);
     for (String allow : config.allowSshCommands()) {
       if (allow.startsWith("^")) {
         allowPatterns.add(Pattern.compile(allow));
@@ -48,7 +53,8 @@ public class DisableCommandInterceptor implements SshCreateCommandInterceptor {
 
   @Override
   public String intercept(String in) {
-    if (allowPrefixes.stream().anyMatch(p -> in.startsWith(p))
+    if (!state.isReadOnly()
+        || allowPrefixes.stream().anyMatch(p -> in.startsWith(p))
         || allowPatterns.stream().anyMatch(p -> p.matcher(in).matches())) {
       return in;
     }

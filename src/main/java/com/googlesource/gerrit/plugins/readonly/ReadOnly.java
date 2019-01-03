@@ -16,6 +16,8 @@ package com.googlesource.gerrit.plugins.readonly;
 
 import static javax.servlet.http.HttpServletResponse.SC_SERVICE_UNAVAILABLE;
 
+import com.google.common.collect.ImmutableList;
+import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.httpd.AllRequestFilter;
 import com.google.gerrit.server.events.CommitReceivedEvent;
 import com.google.gerrit.server.git.validators.CommitValidationException;
@@ -35,32 +37,51 @@ import javax.servlet.http.HttpServletResponse;
 @Singleton
 class ReadOnly extends AllRequestFilter implements CommitValidationListener {
   private static final String GIT_UPLOAD_PACK_PROTOCOL = "/git-upload-pack";
+  private static final String LOGIN_PREFIX = "/login";
+  private static final String LOGIN_INFIX = LOGIN_PREFIX + "/";
+
+  private final ReadOnlyState state;
   private final ReadOnlyConfig config;
+  private final String endpoint;
 
   @Inject
-  ReadOnly(ReadOnlyConfig config) {
+  ReadOnly(ReadOnlyState state, ReadOnlyConfig config, @PluginName String pluginName) {
+    this.state = state;
     this.config = config;
+    this.endpoint = String.format("/config/server/%s~readonly", pluginName);
   }
 
   @Override
   public List<CommitValidationMessage> onCommitReceived(CommitReceivedEvent receiveEvent)
       throws CommitValidationException {
-    throw new CommitValidationException(config.message());
+    if (state.isReadOnly()) {
+      throw new CommitValidationException(config.message());
+    }
+    return ImmutableList.of();
   }
 
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
       throws IOException, ServletException {
-    if ((request instanceof HttpServletRequest) && (response instanceof HttpServletResponse)) {
-      String method = ((HttpServletRequest) request).getMethod();
-      String uri = ((HttpServletRequest) request).getRequestURI();
-      if ((method == "POST" && !uri.endsWith(GIT_UPLOAD_PACK_PROTOCOL))
-          || method == "PUT"
-          || method == "DELETE") {
-        ((HttpServletResponse) response).sendError(SC_SERVICE_UNAVAILABLE, config.message());
-        return;
-      }
+    if (state.isReadOnly()
+        && request instanceof HttpServletRequest
+        && response instanceof HttpServletResponse
+        && shouldBlock((HttpServletRequest) request)) {
+      ((HttpServletResponse) response).sendError(SC_SERVICE_UNAVAILABLE, config.message());
+      return;
     }
     chain.doFilter(request, response);
+  }
+
+  private boolean shouldBlock(HttpServletRequest request) {
+    String method = request.getMethod();
+    String servletPath = request.getServletPath();
+    return !servletPath.endsWith(endpoint)
+        && (("POST".equals(method)
+                && !servletPath.endsWith(GIT_UPLOAD_PACK_PROTOCOL)
+                && !servletPath.equals(LOGIN_PREFIX)
+                && !servletPath.contains(LOGIN_INFIX))
+            || "PUT".equals(method)
+            || "DELETE".equals(method));
   }
 }

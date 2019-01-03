@@ -24,5 +24,14 @@ public class SshModule extends PluginCommandModule {
     DynamicItem.bind(binder(), SshCreateCommandInterceptor.class)
         .to(DisableCommandInterceptor.class);
     command(DisableCommand.class);
+
+    command(EnableReadOnlyCommand.class);
+    alias("on", EnableReadOnlyCommand.class);
+
+    command(DisableReadOnlyCommand.class);
+    alias("off", DisableReadOnlyCommand.class);
+
+    command(GetReadOnlyStatusCommand.class);
+    alias("get", GetReadOnlyStatusCommand.class);
   }
 }

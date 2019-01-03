@@ -38,7 +38,7 @@ class ReadOnlyConfig {
   ReadOnlyConfig(PluginConfigFactory pluginConfigFactory, @PluginName String pluginName) {
     Config cfg = pluginConfigFactory.getGlobalPluginConfig(pluginName);
     this.message = firstNonNull(cfg.getString(pluginName, null, MESSAGE_KEY), DEFAULT_MESSAGE);
-    allowSshCommands = ImmutableList.copyOf(cfg.getStringList(pluginName, null, SSH_ALLOW));
+    this.allowSshCommands = ImmutableList.copyOf(cfg.getStringList(pluginName, null, SSH_ALLOW));
   }
 
   String message() {
