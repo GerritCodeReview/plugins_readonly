@@ -16,16 +16,15 @@ package com.googlesource.gerrit.plugins.readonly;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.apache.http.HttpStatus.SC_SERVICE_UNAVAILABLE;
-import static org.junit.Assert.fail;
 
 import com.google.gerrit.acceptance.GitUtil;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.acceptance.UseSsh;
+import com.google.gerrit.extensions.api.changes.TopicInput;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.extensions.common.ChangeInput;
-import com.google.gerrit.server.change.PutTopic;
 import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
@@ -53,7 +52,7 @@ public abstract class AbstractReadOnlyTest extends LightweightPluginDaemonTest {
     adminRestSession.get(url).assertOK();
 
     // PUT should be allowed
-    PutTopic.Input topic = new PutTopic.Input();
+    TopicInput topic = new TopicInput();
     topic.topic = "topic";
     adminRestSession.put(url + "/topic", topic).assertOK();
 
