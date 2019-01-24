@@ -1,4 +1,3 @@
-load("//tools/bzl:plugin.bzl", "PLUGIN_DEPS")
 load("//tools/bzl:classpath.bzl", "classpath_collector")
 
 classpath_collector(
