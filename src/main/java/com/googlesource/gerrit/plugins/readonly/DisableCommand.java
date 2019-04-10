@@ -14,18 +14,49 @@
 
 package com.googlesource.gerrit.plugins.readonly;
 
-import static com.google.gerrit.sshd.CommandMetaData.Mode.MASTER_OR_SLAVE;
-
-import com.google.gerrit.sshd.CommandMetaData;
-import com.google.gerrit.sshd.SshCommand;
+import com.google.gerrit.extensions.annotations.PluginName;
+import com.google.gerrit.sshd.SshCommandPreExecutionFilter;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@CommandMetaData(name = "disabled", description = "Disable ssh commands", runsAt = MASTER_OR_SLAVE)
-class DisableCommand extends SshCommand {
-  @Inject ReadOnlyConfig config;
+@Singleton
+public class DisableCommand implements SshCommandPreExecutionFilter {
+  private static final Logger log = LoggerFactory.getLogger(DisableCommand.class);
+  private static final String PATTERN = "^gerrit plugin (\\brm\\b|\\bremove\\b) %s$";
+
+  private final ReadOnlyState state;
+  private final List<Pattern> allowPatterns = new ArrayList<>();
+  private final List<String> allowPrefixes = new ArrayList<>();
+
+  @Inject
+  DisableCommand(
+      @PluginName String pluginName, ReadOnlyConfig config, ReadOnlyState state) {
+    allowPatterns.add(Pattern.compile(String.format(PATTERN, pluginName)));
+    // Allow all SSH commands from this plugin
+    allowPrefixes.add(pluginName);
+    for (String allow : config.allowSshCommands()) {
+      if (allow.startsWith("^")) {
+        allowPatterns.add(Pattern.compile(allow));
+      } else {
+        allowPrefixes.add(allow);
+      }
+    }
+  }
 
   @Override
-  protected void run() throws UnloggedFailure {
-    throw new UnloggedFailure(1, "SSH subsystem is temporarily disabled: " + config.message());
+  public boolean accept(String command, List<String> arguments) {
+    if (!state.isReadOnly()
+        || allowPrefixes.stream().anyMatch(p -> command.startsWith(p))
+        || allowPatterns.stream().anyMatch(p -> p.matcher(command).matches())) {
+      return false;
+    }
+
+    log.warn("Disabling command: {}", command);
+    return true;
   }
 }
