@@ -135,7 +135,7 @@ public abstract class AbstractReadOnlyTest extends LightweightPluginDaemonTest {
     String url = ssh ? adminSshSession.getUrl() : admin.getHttpUrl(server);
     if (!ssh) {
       CredentialsProvider.setDefault(
-          new UsernamePasswordCredentialsProvider(admin.username, admin.httpPassword));
+          new UsernamePasswordCredentialsProvider(admin.username(), admin.httpPassword()));
     }
     testRepo = GitUtil.cloneProject(project, url + "/" + project.get());
 
