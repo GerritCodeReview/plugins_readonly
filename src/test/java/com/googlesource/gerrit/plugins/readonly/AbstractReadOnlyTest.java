@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.readonly;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.gerrit.testing.GerritJUnit.assertThrows;
 import static org.apache.http.HttpStatus.SC_SERVICE_UNAVAILABLE;
 
 import com.google.gerrit.acceptance.GitUtil;
@@ -146,12 +147,9 @@ public abstract class AbstractReadOnlyTest extends LightweightPluginDaemonTest {
     setReadOnly(true);
 
     // Push should fail
-    try {
-      pushTo("refs/for/master");
-      fail("expected TransportException");
-    } catch (TransportException e) {
-      assertThat(e).hasMessageThat().contains("READ ONLY");
-    }
+    TransportException thrown =
+        assertThrows(TransportException.class, () -> pushTo("refs/for/master"));
+    assertThat(thrown).hasMessageThat().contains("READ ONLY");
 
     // Disable read-only
     setReadOnly(false);
