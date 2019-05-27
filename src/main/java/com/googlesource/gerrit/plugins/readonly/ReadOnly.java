@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.readonly;
 import static javax.servlet.http.HttpServletResponse.SC_SERVICE_UNAVAILABLE;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Sets;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.httpd.AllRequestFilter;
 import com.google.gerrit.server.events.CommitReceivedEvent;
@@ -26,6 +27,7 @@ import com.google.gerrit.server.git.validators.CommitValidationMessage;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -33,6 +35,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 @Singleton
 class ReadOnly extends AllRequestFilter implements CommitValidationListener {
@@ -42,13 +45,15 @@ class ReadOnly extends AllRequestFilter implements CommitValidationListener {
 
   private final ReadOnlyState state;
   private final ReadOnlyConfig config;
-  private final String endpoint;
+  private final HashSet<String> endpoints;
 
   @Inject
   ReadOnly(ReadOnlyState state, ReadOnlyConfig config, @PluginName String pluginName) {
     this.state = state;
     this.config = config;
-    this.endpoint = String.format("/config/server/%s~readonly", pluginName);
+    this.endpoints =
+        Sets.newHashSet(
+            String.format("/config/server/%s~readonly", pluginName), "/config/server/readonly");
   }
 
   @Override
@@ -76,12 +81,16 @@ class ReadOnly extends AllRequestFilter implements CommitValidationListener {
   private boolean shouldBlock(HttpServletRequest request) {
     String method = request.getMethod();
     String servletPath = request.getServletPath();
-    return !servletPath.endsWith(endpoint)
-        && (("POST".equals(method)
-                && !servletPath.endsWith(GIT_UPLOAD_PACK_PROTOCOL)
-                && !servletPath.equals(LOGIN_PREFIX)
-                && !servletPath.contains(LOGIN_INFIX))
-            || "PUT".equals(method)
-            || "DELETE".equals(method));
+    for (String endpoint : endpoints) {
+      if (servletPath.endsWith(endpoint)) {
+        return false;
+      }
+    }
+    return ("POST".equals(method)
+            && !servletPath.endsWith(GIT_UPLOAD_PACK_PROTOCOL)
+            && !servletPath.equals(LOGIN_PREFIX)
+            && !servletPath.contains(LOGIN_INFIX))
+        || "PUT".equals(method)
+        || "DELETE".equals(method);
   }
 }
