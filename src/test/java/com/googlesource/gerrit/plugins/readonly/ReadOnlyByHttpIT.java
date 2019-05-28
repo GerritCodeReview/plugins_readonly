@@ -21,14 +21,19 @@ import com.google.gerrit.acceptance.RestResponse;
 public class ReadOnlyByHttpIT extends AbstractReadOnlyTest {
   @Override
   protected void setReadOnly(boolean readOnly) throws Exception {
-    if (readOnly) {
-      adminRestSession.put("/config/server/readonly~readonly").assertOK();
-    } else {
-      adminRestSession.delete("/config/server/readonly~readonly").assertOK();
-    }
-    RestResponse response = adminRestSession.get("/config/server/readonly~readonly");
-    response.assertOK();
     String expectedStatus = readOnly ? "on" : "off";
+    RestResponse response;
+    if (readOnly) {
+      response = adminRestSession.put("/config/server/readonly~readonly");
+      response.assertOK();
+      assertThat(response.getEntityContent()).contains(expectedStatus);
+    } else {
+      response = adminRestSession.delete("/config/server/readonly~readonly");
+      response.assertOK();
+      assertThat(response.getEntityContent()).contains(expectedStatus);
+    }
+    response = adminRestSession.get("/config/server/readonly~readonly");
+    response.assertOK();
     assertThat(response.getEntityContent()).contains(expectedStatus);
   }
 }
