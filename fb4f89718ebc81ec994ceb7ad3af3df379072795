@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "618d0635_327321c8",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyByHttpIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2019-05-28T16:51:30Z",
+      "side": 1,
+      "message": "Both standalone and in-tree tests fail to build for me locally, as this package \"does not exist\". Stable-2.15 works (double-checked).",
+      "range": {
+        "startLine": 21,
+        "startChar": 34,
+        "endLine": 21,
+        "endChar": 45
+      },
+      "revId": "fb4f89718ebc81ec994ceb7ad3af3df379072795",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
