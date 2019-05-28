@@ -36,7 +36,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 @Singleton
 class ReadOnly extends AllRequestFilter implements CommitValidationListener {
   private static final String GIT_UPLOAD_PACK_PROTOCOL = "/git-upload-pack";
