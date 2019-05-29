@@ -34,3 +34,12 @@ File gerrit.readonly
 Marker file used to enable or disable the read-only status. When present under
 the $GERRIT_SITE/etc directory, Gerrit is set to read-only and only read
 operations are enabled according to the readonly plugin configuration.
+
+REST API
+--------------------
+
+The plugin provides a REST API to set/delete/query the readonly mode:
+
+* PUT /config/server/readonly~readonly
+* DELETE /config/server/readonly~readonly
+* GET /config/server/readonly~readonly
