@@ -17,18 +17,45 @@ package com.googlesource.gerrit.plugins.readonly;
 import static com.google.common.truth.Truth.assertThat;
 
 import com.google.gerrit.acceptance.RestResponse;
+import com.google.gerrit.server.config.GerritServerConfig;
+import com.google.gerrit.testing.ConfigSuite;
+import com.google.inject.Inject;
+import org.eclipse.jgit.lib.Config;
 
 public class ReadOnlyByHttpIT extends AbstractReadOnlyTest {
+  @ConfigSuite.Default
+  public static Config withPluginNamePrefix() {
+    Config cfg = new Config();
+    cfg.setString("readonly", "test", "endpoint", "readonly~readonly");
+    return cfg;
+  }
+
+  @ConfigSuite.Config
+  public static Config withoutPluginNamePrefix() {
+    Config cfg = new Config();
+    cfg.setString("readonly", "test", "endpoint", "readonly");
+    return cfg;
+  }
+
+  @Inject @GerritServerConfig private Config config;
+
   @Override
   protected void setReadOnly(boolean readOnly) throws Exception {
-    if (readOnly) {
-      adminRestSession.put("/config/server/readonly~readonly").assertOK();
-    } else {
-      adminRestSession.delete("/config/server/readonly~readonly").assertOK();
-    }
-    RestResponse response = adminRestSession.get("/config/server/readonly~readonly");
-    response.assertOK();
+    String endpoint =
+        String.format("/config/server/%s", config.getString("readonly", "test", "endpoint"));
     String expectedStatus = readOnly ? "on" : "off";
+    RestResponse response;
+    if (readOnly) {
+      response = adminRestSession.put(endpoint);
+      response.assertOK();
+      assertThat(response.getEntityContent()).contains(expectedStatus);
+    } else {
+      response = adminRestSession.delete(endpoint);
+      response.assertOK();
+      assertThat(response.getEntityContent()).contains(expectedStatus);
+    }
+    response = adminRestSession.get(endpoint);
+    response.assertOK();
     assertThat(response.getEntityContent()).contains(expectedStatus);
   }
 }

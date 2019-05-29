@@ -58,7 +58,7 @@ public class ReadOnlyEndpoint {
     @Override
     public Response<String> apply(ConfigResource resource, Input input) throws IOException {
       state.setReadOnly(true);
-      return Response.ok("");
+      return Response.ok("on");
     }
   }
 
@@ -75,7 +75,7 @@ public class ReadOnlyEndpoint {
     @Override
     public Response<String> apply(ConfigResource resource, Input input) throws IOException {
       state.setReadOnly(false);
-      return Response.ok("");
+      return Response.ok("off");
     }
   }
 }
