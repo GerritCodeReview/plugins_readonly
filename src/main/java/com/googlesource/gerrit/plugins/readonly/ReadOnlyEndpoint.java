@@ -40,7 +40,7 @@ public class ReadOnlyEndpoint {
     }
 
     @Override
-    public Response apply(ConfigResource resource) {
+    public Response<String> apply(ConfigResource resource) {
       return Response.ok(state.isReadOnly() ? "on" : "off");
     }
   }
