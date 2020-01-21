@@ -68,6 +68,29 @@
       "revId": "053a5a7c6008c45a1f667aa365a256c27e0afa03",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6cdffc5_be06d511",
+        "filename": "src/main/resources/Documentation/build.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-01-21T22:10:14Z",
+      "side": 1,
+      "message": "Another occurrence of that issue, that is now closed. -Wondering if other plugins also mention this one, beside the one(s) flagged so far.",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 61
+      },
+      "revId": "053a5a7c6008c45a1f667aa365a256c27e0afa03",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
