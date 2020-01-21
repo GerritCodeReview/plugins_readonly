@@ -73,6 +73,12 @@ Gerrit core in `tools/bzl/plugins.bzl`, and execute:
   ./tools/eclipse/project.py
 ```
 
+To execute the tests run either one of:
+
+```
+  bazel test plugins/@PLUGIN@:@PLUGIN@_tests
+```
+
 How to build the Gerrit Plugin API is described in the [Gerrit
 documentation](../../../Documentation/dev-bazel.html#_extension_and_plugin_api_jar_files).
 
