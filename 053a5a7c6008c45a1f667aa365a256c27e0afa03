@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "568782a1_5ef8bb96",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-01-22T23:51:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8da8d2b_72e964f1",
+      "range": {
+        "startLine": 7,
+        "startChar": 50,
+        "endLine": 7,
+        "endChar": 57
+      },
+      "revId": "053a5a7c6008c45a1f667aa365a256c27e0afa03",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9676b443_e4dff361",
         "filename": "src/main/resources/Documentation/build.md",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "053a5a7c6008c45a1f667aa365a256c27e0afa03",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3010d4c_c4e81d11",
+        "filename": "src/main/resources/Documentation/build.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-01-22T23:51:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9676b443_e4dff361",
+      "range": {
+        "startLine": 12,
+        "startChar": 9,
+        "endLine": 12,
+        "endChar": 19
+      },
+      "revId": "053a5a7c6008c45a1f667aa365a256c27e0afa03",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "8911aea1_3123c0cf",
+        "filename": "src/main/resources/Documentation/build.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-01-22T23:51:03Z",
+      "side": 1,
+      "message": "there is no alternative",
+      "parentUuid": "3a34578d_7001b842",
+      "range": {
+        "startLine": 76,
+        "startChar": 24,
+        "endLine": 76,
+        "endChar": 38
+      },
+      "revId": "053a5a7c6008c45a1f667aa365a256c27e0afa03",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d6cdffc5_be06d511",
         "filename": "src/main/resources/Documentation/build.md",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2020-01-21T22:10:14Z",
       "side": 1,
       "message": "Another occurrence of that issue, that is now closed. -Wondering if other plugins also mention this one, beside the one(s) flagged so far.",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 61
+      },
+      "revId": "053a5a7c6008c45a1f667aa365a256c27e0afa03",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ea409ee_9fe0c7d7",
+        "filename": "src/main/resources/Documentation/build.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1083195
+      },
+      "writtenOn": "2020-01-22T23:51:03Z",
+      "side": 1,
+      "message": "Will be removed in a follow-up along with the note.",
+      "parentUuid": "d6cdffc5_be06d511",
       "range": {
         "startLine": 88,
         "startChar": 0,
