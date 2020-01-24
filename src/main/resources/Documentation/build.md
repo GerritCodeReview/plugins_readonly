@@ -35,6 +35,12 @@ The output is created in:
   bazel-bin/lib@PLUGIN@__plugin-src.jar
 ```
 
+To execute the tests run:
+
+```
+  bazel test //...
+```
+
 This project can be imported into the Eclipse IDE:
 
 ```
@@ -71,6 +77,12 @@ Gerrit core in `tools/bzl/plugins.bzl`, and execute:
 
 ```
   ./tools/eclipse/project.py
+```
+
+To execute the tests run:
+
+```
+  bazel test plugins/@PLUGIN@:@PLUGIN@_tests
 ```
 
 How to build the Gerrit Plugin API is described in the [Gerrit
