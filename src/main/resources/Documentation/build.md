@@ -35,6 +35,12 @@ The output is created in:
   bazel-bin/lib@PLUGIN@__plugin-src.jar
 ```
 
+To execute the tests run:
+
+```
+  bazel test //...
+```
+
 This project can be imported into the Eclipse IDE:
 
 ```
@@ -50,19 +56,16 @@ source tree. From Gerrit source tree issue the command:
   bazel build plugins/@PLUGIN@
 ```
 
-Note that due to a [known issue in Bazel][bazelissue], if the plugin
-has previously been built in standalone mode, it is necessary to clean
-the workspace before building in-tree:
-
-```
-  cd plugins/@PLUGIN@
-  bazel clean --expunge
-```
-
 The output is created in
 
 ```
   bazel-bin/plugins/@PLUGIN@/@PLUGIN@.jar
+```
+
+To execute the tests run:
+
+```
+  bazel test plugins/@PLUGIN@:@PLUGIN@_tests
 ```
 
 This project can be imported into the Eclipse IDE.
@@ -79,4 +82,3 @@ documentation](../../../Documentation/dev-bazel.html#_extension_and_plugin_api_j
 [Back to @PLUGIN@ documentation index][index]
 
 [index]: index.html
-[bazelissue]: https://github.com/bazelbuild/bazel/issues/2797
