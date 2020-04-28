@@ -71,7 +71,9 @@ class ReadOnly extends AllRequestFilter implements CommitValidationListener {
         && request instanceof HttpServletRequest
         && response instanceof HttpServletResponse
         && shouldBlock((HttpServletRequest) request)) {
-      ((HttpServletResponse) response).sendError(SC_SERVICE_UNAVAILABLE, config.message());
+      HttpServletResponse httpResponse = (HttpServletResponse) response;
+      httpResponse.setStatus(SC_SERVICE_UNAVAILABLE);
+      httpResponse.getWriter().println(config.message());
       return;
     }
     chain.doFilter(request, response);
