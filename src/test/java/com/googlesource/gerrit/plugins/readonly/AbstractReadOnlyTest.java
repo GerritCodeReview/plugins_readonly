@@ -122,16 +122,16 @@ public abstract class AbstractReadOnlyTest extends LightweightPluginDaemonTest {
   @UseLocalDisk
   @UseSsh
   public void pushBySshIsRejectedWhenReadOnly() throws Exception {
-    pushForReview(true);
+    pushForReview(true, "READ ONLY");
   }
 
   @Test
   @UseLocalDisk
   public void pushByHttpIsRejectedWhenReadOnly() throws Exception {
-    pushForReview(false);
+    pushForReview(false, "Service Unavailable");
   }
 
-  private void pushForReview(boolean ssh) throws Exception {
+  private void pushForReview(boolean ssh, String expectedMessage) throws Exception {
     String url = ssh ? adminSshSession.getUrl() : admin.getHttpUrl(server);
     if (!ssh) {
       CredentialsProvider.setDefault(
@@ -150,7 +150,7 @@ public abstract class AbstractReadOnlyTest extends LightweightPluginDaemonTest {
       pushTo("refs/for/master");
       fail("expected TransportException");
     } catch (TransportException e) {
-      assertThat(e).hasMessageThat().contains("READ ONLY");
+      assertThat(e).hasMessageThat().contains(expectedMessage);
     }
 
     // Disable read-only
