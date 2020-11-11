@@ -34,6 +34,24 @@
       "parentUuid": "358226b1_5a072cbb",
       "revId": "7b34ca781637198e94badc6e1b8e695d2713f945",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e8df01f_c4d333ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-11-11T20:27:44Z",
+      "side": 1,
+      "message": "Yes, both on repo-discuss and in Slack.",
+      "parentUuid": "6bbc26f6_0a17bc7b",
+      "revId": "7b34ca781637198e94badc6e1b8e695d2713f945",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
