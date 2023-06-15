@@ -9,6 +9,13 @@ File '@PLUGIN@.config'
 ```
 [readonly]
   message = Gerrit is down for maintenance
+  allowSshCommand = add
+[readonly "PUT"]
+  allowHttpCommand = /a/groups/
+  allowHttpCommand = ^/group/
+[readonly "POST"]
+  allowHttpCommand = /a/changes/
+
 ```
 
 If the configuration is modified, the plugin must be reloaded for the changes to
@@ -22,6 +29,13 @@ be effective.
 
 ```readonly.allowSshCommand```
 :   Allow one or more SSH commands to be executed. When the allow value starts
+    with a caret '^' then it is interpreted as regex, otherwise as a prefix.
+    Repeat with multiple values to allow more than one command or pattern
+    of commands.
+    The command 'gerrit plugin rm' or 'gerrit plugin remove' is always allowed.
+
+```readonly.restapitype.allowHttpCommand```
+:   Allow one or more HTTP commands to be executed. When the allow value starts
     with a caret '^' then it is interpreted as regex, otherwise as a prefix.
     Repeat with multiple values to allow more than one command or pattern
     of commands.

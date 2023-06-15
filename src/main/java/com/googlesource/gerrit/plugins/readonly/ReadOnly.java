@@ -26,7 +26,11 @@ import com.google.gerrit.server.git.validators.CommitValidationMessage;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -39,16 +43,33 @@ class ReadOnly extends AllRequestFilter implements CommitValidationListener {
   private static final String GIT_UPLOAD_PACK_PROTOCOL = "/git-upload-pack";
   private static final String LOGIN_PREFIX = "/login";
   private static final String LOGIN_INFIX = LOGIN_PREFIX + "/";
+  private static final String[] methods = {"POST", "PUT", "DELETE"};
 
   private final ReadOnlyState state;
   private final ReadOnlyConfig config;
   private final String endpoint;
+  private final HashMap<String, List<Pattern>> allowHttpPatterns = new HashMap<String, List<Pattern>>();
+  private final HashMap<String, List<String>> allowHttpPrefixes = new HashMap<String, List<String>>();
 
   @Inject
   ReadOnly(ReadOnlyState state, ReadOnlyConfig config, @PluginName String pluginName) {
     this.state = state;
     this.config = config;
     this.endpoint = String.format("/config/server/%s~readonly", pluginName);
+    for (String method : methods) {
+      allowHttpPatterns.put(method, new ArrayList<>());
+      allowHttpPrefixes.put(method, new ArrayList<>());
+    }
+
+    for (Map.Entry<String, List<String>> allowMeth : config.allowHttpCommands().entrySet()) {
+      for (String allow : allowMeth.getValue()) {
+        if (allow.startsWith("^")) {
+          allowHttpPatterns.get(allowMeth.getKey()).add(Pattern.compile(allow));
+        } else {
+          allowHttpPrefixes.get(allowMeth.getKey()).add(allow);
+        }
+      }
+    }
   }
 
   @Override
@@ -76,6 +97,10 @@ class ReadOnly extends AllRequestFilter implements CommitValidationListener {
   private boolean shouldBlock(HttpServletRequest request) {
     String method = request.getMethod();
     String servletPath = request.getServletPath();
+    if (allowHttpPrefixes.get(method).stream().anyMatch(p -> servletPath.startsWith(p))
+        || allowHttpPatterns.get(method).stream().anyMatch(p -> p.matcher(servletPath).matches())){
+      return false;
+    }
     return !servletPath.endsWith(endpoint)
         && (("POST".equals(method)
                 && !servletPath.endsWith(GIT_UPLOAD_PACK_PROTOCOL)

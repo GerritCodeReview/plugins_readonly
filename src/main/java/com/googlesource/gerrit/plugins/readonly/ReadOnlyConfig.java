@@ -21,6 +21,8 @@ import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.server.config.PluginConfigFactory;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+
+import java.util.HashMap;
 import java.util.List;
 import org.eclipse.jgit.lib.Config;
 
@@ -30,14 +32,20 @@ class ReadOnlyConfig {
   private static final String DEFAULT_MESSAGE =
       "Gerrit is under maintenance - all data is READ ONLY";
   private static final String SSH_ALLOW = "allowSshCommand";
+  private static final String HTTP_ALLOW = "allowHttpCommand";
+  private static final String[] methods = {"POST", "PUT", "DELETE"};
 
   private final String message;
   private final List<String> allowSshCommands;
+  private final HashMap<String, List<String>> allowHttpCommands = new HashMap<String, List<String>>();
 
   @Inject
   ReadOnlyConfig(PluginConfigFactory pluginConfigFactory, @PluginName String pluginName) {
     Config cfg = pluginConfigFactory.getGlobalPluginConfig(pluginName);
     this.message = firstNonNull(cfg.getString(pluginName, null, MESSAGE_KEY), DEFAULT_MESSAGE);
+    for (String method : methods) {
+      this.allowHttpCommands.put(method, ImmutableList.copyOf(cfg.getStringList(pluginName, method, HTTP_ALLOW)));
+    }
     this.allowSshCommands = ImmutableList.copyOf(cfg.getStringList(pluginName, null, SSH_ALLOW));
   }
 
@@ -47,5 +55,8 @@ class ReadOnlyConfig {
 
   List<String> allowSshCommands() {
     return allowSshCommands;
+  }
+  HashMap<String, List<String>> allowHttpCommands() {
+    return allowHttpCommands;
   }
 }
