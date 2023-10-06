@@ -41,6 +41,8 @@ class ReadOnly extends AllRequestFilter implements CommitValidationListener {
   private static final String GIT_UPLOAD_PACK_PROTOCOL = "/git-upload-pack";
   private static final String LOGIN_PREFIX = "/login";
   private static final String LOGIN_INFIX = LOGIN_PREFIX + "/";
+  private static final String LFS_PREFIX = "/lfs";
+  private static final String LFS_INFIX = LOGIN_PREFIX + "/";
 
   private final ReadOnlyState state;
   private final ReadOnlyConfig config;
@@ -91,6 +93,7 @@ class ReadOnly extends AllRequestFilter implements CommitValidationListener {
             && !servletPath.endsWith(GIT_UPLOAD_PACK_PROTOCOL)
             && !servletPath.equals(LOGIN_PREFIX)
             && !servletPath.contains(LOGIN_INFIX))
+            && !servletPath.contains(LFS_INFIX))
         || "PUT".equals(method)
         || "DELETE".equals(method);
   }
