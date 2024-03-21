@@ -20,6 +20,10 @@ be effective.
     is blocked due to the server being in read-only mode. When not specified,
     the default is "Gerrit is under maintenance - all data is READ ONLY".
 
+```readonly.markerDir```
+:   Directory in which to create the file marking that Gerrit is in readonly mode.
+    By default, this is `$SITE/etc`.
+
 ```readonly.allowSshCommand```
 :   Allow one or more SSH commands to be executed. When the allow value starts
     with a caret '^' then it is interpreted as regex, otherwise as a prefix.
