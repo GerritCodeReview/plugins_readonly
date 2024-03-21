@@ -14,7 +14,6 @@
 
 package com.googlesource.gerrit.plugins.readonly;
 
-import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.io.File;
@@ -29,8 +28,8 @@ public class ReadOnlyState {
   private final File marker;
 
   @Inject
-  ReadOnlyState(SitePaths sitePaths) {
-    this.marker = sitePaths.etc_dir.resolve(GERRIT_READONLY).toFile();
+  ReadOnlyState(ReadOnlyConfig cfg) {
+    this.marker = cfg.markerDir().resolve(GERRIT_READONLY).toFile();
   }
 
   public boolean isReadOnly() {
