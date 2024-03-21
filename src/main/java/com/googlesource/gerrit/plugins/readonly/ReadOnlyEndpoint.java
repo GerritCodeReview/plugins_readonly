@@ -14,68 +14,31 @@
 
 package com.googlesource.gerrit.plugins.readonly;
 
-import static com.google.gerrit.common.data.GlobalCapability.ADMINISTRATE_SERVER;
-import static com.google.gerrit.common.data.GlobalCapability.MAINTAIN_SERVER;
+import static com.google.gerrit.server.permissions.GlobalPermission.ADMINISTRATE_SERVER;
+import static com.google.gerrit.server.permissions.GlobalPermission.MAINTAIN_SERVER;
 
-import com.google.gerrit.extensions.annotations.RequiresAnyCapability;
-import com.google.gerrit.extensions.restapi.Response;
-import com.google.gerrit.extensions.restapi.RestModifyView;
-import com.google.gerrit.extensions.restapi.RestReadView;
-import com.google.gerrit.server.config.ConfigResource;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import java.io.IOException;
+import com.google.gerrit.extensions.restapi.AuthException;
+import com.google.gerrit.server.CurrentUser;
+import com.google.gerrit.server.permissions.PermissionBackend;
+import com.google.gerrit.server.permissions.PermissionBackendException;
+import com.google.inject.Provider;
+import java.util.Set;
 
 public class ReadOnlyEndpoint {
-  static class Input {}
+  private final Provider<CurrentUser> userProvider;
+  private final PermissionBackend permissionBackend;
 
-  @RequiresAnyCapability({ADMINISTRATE_SERVER, MAINTAIN_SERVER})
-  @Singleton
-  public static class Get implements RestReadView<ConfigResource> {
-    private final ReadOnlyState state;
-
-    @Inject
-    Get(ReadOnlyState state) {
-      this.state = state;
-    }
-
-    @Override
-    public Response<String> apply(ConfigResource resource) {
-      return Response.ok(state.isReadOnly() ? "on" : "off");
-    }
+  public ReadOnlyEndpoint(Provider<CurrentUser> userProvider, PermissionBackend permissionBackend) {
+    this.userProvider = userProvider;
+    this.permissionBackend = permissionBackend;
   }
 
-  @RequiresAnyCapability({ADMINISTRATE_SERVER, MAINTAIN_SERVER})
-  @Singleton
-  public static class Put implements RestModifyView<ConfigResource, Input> {
-    private final ReadOnlyState state;
-
-    @Inject
-    Put(ReadOnlyState state) {
-      this.state = state;
+  void checkPermissions() throws AuthException, PermissionBackendException {
+    CurrentUser requestingUser = userProvider.get();
+    if (requestingUser == null || !requestingUser.isIdentifiedUser()) {
+      throw new AuthException("authentication required");
     }
 
-    @Override
-    public Response<String> apply(ConfigResource resource, Input input) throws IOException {
-      state.setReadOnly(true);
-      return Response.ok("on");
-    }
-  }
-
-  @RequiresAnyCapability({ADMINISTRATE_SERVER, MAINTAIN_SERVER})
-  @Singleton
-  public static class Delete implements RestModifyView<ConfigResource, Input> {
-    private final ReadOnlyState state;
-
-    @Inject
-    Delete(ReadOnlyState state) {
-      this.state = state;
-    }
-
-    @Override
-    public Response<String> apply(ConfigResource resource, Input input) throws IOException {
-      state.setReadOnly(false);
-      return Response.ok("off");
-    }
+    permissionBackend.user(requestingUser).checkAny(Set.of(ADMINISTRATE_SERVER, MAINTAIN_SERVER));
   }
 }
