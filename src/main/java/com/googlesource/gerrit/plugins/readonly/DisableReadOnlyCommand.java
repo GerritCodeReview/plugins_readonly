@@ -18,6 +18,8 @@ import static com.google.gerrit.common.data.GlobalCapability.ADMINISTRATE_SERVER
 import static com.google.gerrit.common.data.GlobalCapability.MAINTAIN_SERVER;
 
 import com.google.gerrit.extensions.annotations.RequiresAnyCapability;
+import com.google.gerrit.extensions.restapi.AuthException;
+import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gerrit.sshd.CommandMetaData;
 import com.google.gerrit.sshd.SshCommand;
 import com.google.inject.Inject;
@@ -26,10 +28,10 @@ import java.io.IOException;
 @RequiresAnyCapability({ADMINISTRATE_SERVER, MAINTAIN_SERVER})
 @CommandMetaData(name = "disable", description = "Disable read only mode")
 class DisableReadOnlyCommand extends SshCommand {
-  @Inject ReadOnlyEndpoint.Delete delete;
+  @Inject DeleteReadOnly delete;
 
   @Override
-  protected void run() throws IOException {
+  protected void run() throws IOException, AuthException, PermissionBackendException {
     delete.apply(null, null);
   }
 }

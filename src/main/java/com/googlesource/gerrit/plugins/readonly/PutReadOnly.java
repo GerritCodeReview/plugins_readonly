@@ -14,31 +14,37 @@
 
 package com.googlesource.gerrit.plugins.readonly;
 
-import static com.google.gerrit.server.permissions.GlobalPermission.ADMINISTRATE_SERVER;
-import static com.google.gerrit.server.permissions.GlobalPermission.MAINTAIN_SERVER;
-
+import com.google.gerrit.extensions.common.Input;
 import com.google.gerrit.extensions.restapi.AuthException;
+import com.google.gerrit.extensions.restapi.Response;
+import com.google.gerrit.extensions.restapi.RestModifyView;
 import com.google.gerrit.server.CurrentUser;
+import com.google.gerrit.server.config.ConfigResource;
 import com.google.gerrit.server.permissions.PermissionBackend;
 import com.google.gerrit.server.permissions.PermissionBackendException;
+import com.google.inject.Inject;
 import com.google.inject.Provider;
-import java.util.Set;
+import com.google.inject.Singleton;
+import java.io.IOException;
 
-public class ReadOnlyEndpoint {
-  private final Provider<CurrentUser> userProvider;
-  private final PermissionBackend permissionBackend;
+@Singleton
+public class PutReadOnly extends ReadOnlyEndpoint implements RestModifyView<ConfigResource, Input> {
+  private final ReadOnlyState state;
 
-  public ReadOnlyEndpoint(Provider<CurrentUser> userProvider, PermissionBackend permissionBackend) {
-    this.userProvider = userProvider;
-    this.permissionBackend = permissionBackend;
+  @Inject
+  public PutReadOnly(
+      Provider<CurrentUser> userProvider,
+      PermissionBackend permissionBackend,
+      ReadOnlyState state) {
+    super(userProvider, permissionBackend);
+    this.state = state;
   }
 
-  void checkPermissions() throws AuthException, PermissionBackendException {
-    CurrentUser requestingUser = userProvider.get();
-    if (requestingUser == null || !requestingUser.isIdentifiedUser()) {
-      throw new AuthException("authentication required");
-    }
-
-    permissionBackend.user(requestingUser).checkAny(Set.of(ADMINISTRATE_SERVER, MAINTAIN_SERVER));
+  @Override
+  public Response<String> apply(ConfigResource resource, Input input)
+      throws IOException, AuthException, PermissionBackendException {
+    checkPermissions();
+    state.setReadOnly(true);
+    return Response.ok("on");
   }
 }

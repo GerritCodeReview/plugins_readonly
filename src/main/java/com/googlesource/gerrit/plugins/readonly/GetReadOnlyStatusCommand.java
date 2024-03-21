@@ -14,21 +14,18 @@
 
 package com.googlesource.gerrit.plugins.readonly;
 
-import static com.google.gerrit.common.data.GlobalCapability.ADMINISTRATE_SERVER;
-import static com.google.gerrit.common.data.GlobalCapability.MAINTAIN_SERVER;
-
-import com.google.gerrit.extensions.annotations.RequiresAnyCapability;
+import com.google.gerrit.extensions.restapi.AuthException;
+import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gerrit.sshd.CommandMetaData;
 import com.google.gerrit.sshd.SshCommand;
 import com.google.inject.Inject;
 
-@RequiresAnyCapability({ADMINISTRATE_SERVER, MAINTAIN_SERVER})
 @CommandMetaData(name = "status", description = "Show read only mode state")
 class GetReadOnlyStatusCommand extends SshCommand {
-  @Inject ReadOnlyEndpoint.Get get;
+  @Inject GetReadOnly get;
 
   @Override
-  protected void run() {
+  protected void run() throws AuthException, PermissionBackendException {
     stdout.println(get.apply(null));
   }
 }
