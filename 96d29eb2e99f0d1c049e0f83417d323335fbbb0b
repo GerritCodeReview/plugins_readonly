@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb4618f2_84d22995",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2024-03-21T18:37:16Z",
+      "side": 1,
+      "message": "This method now has to make sure that the parent directories of the maker file exist (as this can now be any path). Use `File.mkdirs` for that.",
+      "revId": "96d29eb2e99f0d1c049e0f83417d323335fbbb0b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
