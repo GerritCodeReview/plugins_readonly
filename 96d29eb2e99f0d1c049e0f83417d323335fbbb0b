@@ -16,6 +16,24 @@
       "message": "This method now has to make sure that the parent directories of the maker file exist (as this can now be any path). Use `File.mkdirs` for that.",
       "revId": "96d29eb2e99f0d1c049e0f83417d323335fbbb0b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a620e58e_1868ee0a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-03-21T19:36:04Z",
+      "side": 1,
+      "message": "the NIO equivalent is `Files.createDirectories(Path)`, see https://docs.oracle.com/javase/8/docs/api/java/nio/file/Files.html#createDirectories-java.nio.file.Path-java.nio.file.attribute.FileAttribute...-",
+      "parentUuid": "eb4618f2_84d22995",
+      "revId": "96d29eb2e99f0d1c049e0f83417d323335fbbb0b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
