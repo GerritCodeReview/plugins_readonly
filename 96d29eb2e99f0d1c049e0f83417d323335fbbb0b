@@ -34,6 +34,24 @@
       "parentUuid": "eb4618f2_84d22995",
       "revId": "96d29eb2e99f0d1c049e0f83417d323335fbbb0b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06f7da50_736b8203",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/readonly/ReadOnlyState.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-03-21T20:00:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a620e58e_1868ee0a",
+      "revId": "96d29eb2e99f0d1c049e0f83417d323335fbbb0b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
