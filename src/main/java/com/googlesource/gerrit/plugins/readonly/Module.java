@@ -29,9 +29,9 @@ class Module extends AbstractModule {
         new RestApiModule() {
           @Override
           protected void configure() {
-            put(CONFIG_KIND, "readonly").to(ReadOnlyEndpoint.Put.class);
-            delete(CONFIG_KIND, "readonly").to(ReadOnlyEndpoint.Delete.class);
-            get(CONFIG_KIND, "readonly").to(ReadOnlyEndpoint.Get.class);
+            put(CONFIG_KIND, "readonly").to(PutReadOnly.class);
+            delete(CONFIG_KIND, "readonly").to(DeleteReadOnly.class);
+            get(CONFIG_KIND, "readonly").to(GetReadOnly.class);
           }
         });
   }
