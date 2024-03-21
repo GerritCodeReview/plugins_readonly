@@ -14,7 +14,6 @@
 
 package com.googlesource.gerrit.plugins.readonly;
 
-import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.io.IOException;
@@ -26,11 +25,13 @@ import java.nio.file.StandardOpenOption;
 public class ReadOnlyState {
   private static final String GERRIT_READONLY = "gerrit.readonly";
 
+  private final Path markerDir;
   private final Path marker;
 
   @Inject
-  ReadOnlyState(SitePaths sitePaths) {
-    this.marker = sitePaths.etc_dir.resolve(GERRIT_READONLY);
+  ReadOnlyState(ReadOnlyConfig cfg) {
+    this.markerDir = cfg.markerDir();
+    this.marker = markerDir.resolve(GERRIT_READONLY);
   }
 
   public boolean isReadOnly() {
@@ -38,6 +39,7 @@ public class ReadOnlyState {
   }
 
   public void setReadOnly(boolean readOnly) throws IOException {
+    Files.createDirectories(markerDir);
     if (readOnly && !Files.exists(marker)) {
       Files.newOutputStream(marker, StandardOpenOption.CREATE).close();
     } else if (!readOnly && Files.exists(marker)) {
