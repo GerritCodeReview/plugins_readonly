@@ -29,7 +29,27 @@ be effective.
     with a caret '^' then it is interpreted as regex, otherwise as a prefix.
     Repeat with multiple values to allow more than one command or pattern
     of commands.
-    The command 'gerrit plugin rm' or 'gerrit plugin remove' is always allowed.
+    The command `gerrit plugin rm` or `gerrit plugin remove` is always allowed.
+    The following read-only commands are always allowed:
+    - `gerrit apropos`
+    - `gerrit check-project-access`
+    - `gerrit logging ls-level`
+    - `gerrit ls-groups`
+    - `gerrit ls-members`
+    - `gerrit ls-projects`
+    - `gerrit ls-user-refs`
+    - `gerrit plugin ls`
+    - `gerrit query`
+    - `gerrit sequence show`
+    - `gerrit show-caches`
+    - `gerrit show-connections`
+    - `gerrit show-queue`
+    - `gerrit stream-events`, this allows you to keep the stream-events SSH connection
+        open while the server is read-only. Though while the server is read-only it will
+        not send any events.
+    - `gerrit version`
+    - `git upload-pack`
+    - `scp`
 
 
 File gerrit.readonly

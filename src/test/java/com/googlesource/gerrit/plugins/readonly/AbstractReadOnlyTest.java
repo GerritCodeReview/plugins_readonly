@@ -28,7 +28,9 @@ import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.extensions.common.ChangeInput;
 import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.transport.CredentialsProvider;
+import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
+import org.eclipse.jgit.util.FS;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -98,11 +100,10 @@ public abstract class AbstractReadOnlyTest extends LightweightPluginDaemonTest {
   @UseLocalDisk
   @UseSsh
   public void sshCommandsAreRejectedWhenReadOnly() throws Exception {
-    String command = "gerrit ls-projects";
+    String command = "gerrit gc All-Users";
 
     // Command should succeed
-    adminSshSession.exec(command);
-    adminSshSession.assertSuccess();
+    assertCommandSuccess(command);
 
     // Enable read-only
     setReadOnly(true);
@@ -115,8 +116,7 @@ public abstract class AbstractReadOnlyTest extends LightweightPluginDaemonTest {
     setReadOnly(false);
 
     // Command should succeed
-    adminSshSession.exec(command);
-    adminSshSession.assertSuccess();
+    assertCommandSuccess(command);
   }
 
   @Test
@@ -156,6 +156,65 @@ public abstract class AbstractReadOnlyTest extends LightweightPluginDaemonTest {
 
     // Push should succeed
     pushTo("refs/for/master").assertOkStatus();
+  }
+
+  @Test
+  @UseLocalDisk
+  @UseSsh
+  public void readonlySshCommandsAreAllowedWhenReadOnly() throws Exception {
+    // Enable read-only
+    setReadOnly(true);
+
+    // can't test apropos command since documentation is not included in test setup
+    // there's no point testing stream-events since read-only server doesn't emit any events
+
+    assertCommandSuccess("gerrit check-project-access -p All-Projects -u admin");
+    assertCommandSuccess("gerrit logging ls-level filter");
+    assertCommandSuccess("gerrit ls-groups");
+    assertCommandSuccess("gerrit ls-members Administrators");
+    assertCommandSuccess("gerrit ls-projects");
+    assertCommandSuccess("gerrit ls-user-refs -p All-Projects -u admin");
+    assertCommandSuccess("gerrit plugin ls");
+    assertCommandSuccess("gerrit query project:All-Projects");
+    assertCommandSuccess("gerrit sequence show changes");
+    assertCommandSuccess("gerrit show-caches");
+    assertCommandSuccess("gerrit show-connections");
+    assertCommandSuccess("gerrit show-queue");
+    assertCommandSuccess("gerrit version");
+  }
+
+  private void assertCommandSuccess(String command) throws Exception {
+    // Command should succeed
+    adminSshSession.exec(command);
+    adminSshSession.assertSuccess();
+  }
+
+  @Test
+  @UseLocalDisk
+  @UseSsh
+  public void scpAllowedWhenReadOnly() throws Exception {
+    setReadOnly(true);
+
+    URIish url = new URIish(adminSshSession.getUrl());
+    ProcessBuilder pb =
+        FS.DETECTED.runInShell(
+            "scp",
+            new String[] {
+              "-p",
+              "-P " + url.getPort(),
+              getAdmin().username() + "@" + url.getHost() + ":hooks/commit-msg",
+              temporaryFolder.newFile().getAbsolutePath()
+            });
+    Process p = pb.start();
+    assertThat(p.waitFor()).isEqualTo(0);
+  }
+
+  @Test
+  @UseLocalDisk
+  @UseSsh
+  public void uploadPackAllowedWhenReadOnly() throws Exception {
+    setReadOnly(true);
+    testRepo = cloneProject(project, getAdmin());
   }
 
   protected abstract void setReadOnly(boolean readOnly) throws Exception;
