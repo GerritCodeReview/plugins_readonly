@@ -33,6 +33,25 @@ class ReadOnlyConfig {
   private static final String DEFAULT_MESSAGE =
       "Gerrit is under maintenance - all data is READ ONLY";
   private static final String SSH_ALLOW = "allowSshCommand";
+  private static final Set<String> READ_ONLY_COMMANDS =
+      ImmutableSet.of(
+          "gerrit apropos",
+          "gerrit check-project-access",
+          "gerrit logging ls-level",
+          "gerrit ls-groups",
+          "gerrit ls-members",
+          "gerrit ls-projects",
+          "gerrit ls-user-refs",
+          "gerrit plugin ls",
+          "gerrit query",
+          "gerrit sequence show",
+          "gerrit show-caches",
+          "gerrit show-connections",
+          "gerrit show-queue",
+          "gerrit stream-events",
+          "gerrit version",
+          "git upload-pack",
+          "scp");
 
   private final String message;
   private final Path markerDir;
@@ -46,7 +65,11 @@ class ReadOnlyConfig {
     this.markerDir =
         sitePaths.resolve(
             firstNonNull(cfg.getString(pluginName, null, MARKER_DIR_PATH_KEY), "etc"));
-    this.allowSshCommands = ImmutableSet.copyOf(cfg.getStringList(pluginName, null, SSH_ALLOW));
+    this.allowSshCommands =
+        ImmutableSet.<String>builder()
+            .addAll(READ_ONLY_COMMANDS)
+            .addAll(ImmutableSet.copyOf(cfg.getStringList(pluginName, null, SSH_ALLOW)))
+            .build();
   }
 
   String message() {

@@ -98,7 +98,7 @@ public abstract class AbstractReadOnlyTest extends LightweightPluginDaemonTest {
   @UseLocalDisk
   @UseSsh
   public void sshCommandsAreRejectedWhenReadOnly() throws Exception {
-    String command = "gerrit ls-projects";
+    String command = "gerrit gc All-Users";
 
     // Command should succeed
     adminSshSession.exec(command);
