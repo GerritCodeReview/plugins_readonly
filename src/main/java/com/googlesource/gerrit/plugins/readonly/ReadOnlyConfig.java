@@ -16,14 +16,14 @@ package com.googlesource.gerrit.plugins.readonly;
 
 import static com.google.common.base.MoreObjects.firstNonNull;
 
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.server.config.PluginConfigFactory;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.nio.file.Path;
-import java.util.List;
+import java.util.Set;
 import org.eclipse.jgit.lib.Config;
 
 @Singleton
@@ -36,7 +36,7 @@ class ReadOnlyConfig {
 
   private final String message;
   private final Path markerDir;
-  private final List<String> allowSshCommands;
+  private final Set<String> allowSshCommands;
 
   @Inject
   ReadOnlyConfig(
@@ -46,7 +46,7 @@ class ReadOnlyConfig {
     this.markerDir =
         sitePaths.resolve(
             firstNonNull(cfg.getString(pluginName, null, MARKER_DIR_PATH_KEY), "etc"));
-    this.allowSshCommands = ImmutableList.copyOf(cfg.getStringList(pluginName, null, SSH_ALLOW));
+    this.allowSshCommands = ImmutableSet.copyOf(cfg.getStringList(pluginName, null, SSH_ALLOW));
   }
 
   String message() {
@@ -57,7 +57,7 @@ class ReadOnlyConfig {
     return markerDir;
   }
 
-  List<String> allowSshCommands() {
+  Set<String> allowSshCommands() {
     return allowSshCommands;
   }
 }
