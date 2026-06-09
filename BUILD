@@ -1,14 +1,13 @@
-load("@rules_java//java:defs.bzl", "java_library")
-load("//tools/bzl:junit.bzl", "junit_tests")
 load(
-    "//tools/bzl:plugin.bzl",
-    "PLUGIN_DEPS",
-    "PLUGIN_TEST_DEPS",
+    "@com_googlesource_gerrit_bazlets//:gerrit_plugin.bzl",
     "gerrit_plugin",
+    "gerrit_plugin_tests",
 )
 
+PLUGIN = "readonly"
+
 gerrit_plugin(
-    name = "readonly",
+    name = PLUGIN,
     srcs = glob(["src/main/java/**/*.java"]),
     manifest_entries = [
         "Gerrit-PluginName: readonly",
@@ -19,20 +18,9 @@ gerrit_plugin(
     resources = glob(["src/main/resources/**/*"]),
 )
 
-junit_tests(
+gerrit_plugin_tests(
     name = "readonly_tests",
     srcs = glob(["src/test/java/**/*.java"]),
+    plugin = PLUGIN,
     resources = glob(["src/test/resources/**/*"]),
-    deps = [
-        ":readonly__plugin_test_deps",
-    ],
-)
-
-java_library(
-    name = "readonly__plugin_test_deps",
-    testonly = 1,
-    visibility = ["//visibility:public"],
-    exports = PLUGIN_DEPS + PLUGIN_TEST_DEPS + [
-        ":readonly__plugin",
-    ],
 )
